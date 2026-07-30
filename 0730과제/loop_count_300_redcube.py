@@ -45,7 +45,7 @@ while simulation_app.is_running():
 
     # Play 중일 때만 카운트
     if world.is_playing():
-        step_count += 1
+        step_count += 2
 
         if step_count % 100 == 0:
             print("step count:", step_count)
