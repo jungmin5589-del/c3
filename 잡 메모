@@ -1,0 +1,31 @@
+step_count = 0
+was_stopped = False
+
+while simulation_app.is_running():
+    world.step(render=True)
+    time.sleep(0.01)
+
+    # Stop 버튼을 누른 상태
+    if world.is_stopped():
+        was_stopped = True
+        continue
+
+    # Stop 후 다시 Play한 순간
+    if world.is_playing() and was_stopped:
+        world.reset()
+        step_count = 0
+        was_stopped = False
+        print("[리셋] 다시 Play → step_count = 0")
+
+    # Play 중일 때만 카운트
+    if world.is_playing():
+        step_count += 1
+
+        if step_count % 100 == 0:
+            print("step count:", step_count)
+
+        if step_count == 300:
+            red_cube.set_world_pose(
+                position=np.array([0.0, 0.0, 1.0])
+            )
+            print("[이동] 300스텝 → 큐브를 Z=1.0으로 이동")
