@@ -2,3 +2,8 @@
 build/
 install/
 log/
+__pycache__/
+*.pyc
+onrobot_rg2/
+.codex
+.agents

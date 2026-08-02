@@ -1,0 +1,59 @@
+{
+    "version": "1.0",
+    "file_records": [
+        {
+            "source_url": "/home/rokey/cobot3_ws/isaacpjt/M0609/Collected_m0609_camera/omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.1/Isaac/Materials/Base/Metals/Aluminum_Anodized.mdl",
+            "source_hash": "20920b00b3524cbe5872ece1a3b03cc99bba1928",
+            "target_url": "./omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.1/Isaac/Materials/Base/Metals/Aluminum_Anodized.mdl",
+            "target_hash": "96439a78a51e3604c565a25a5ee36f438f7b379c"
+        },
+        {
+            "source_url": "/home/rokey/cobot3_ws/isaacpjt/M0609/Collected_m0609_camera/omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.1/Isaac/Materials/Base/Metals/Aluminum_Cast.mdl",
+            "source_hash": "0a2583747ad13b380fb30aa7f22a3a267629765d",
+            "target_url": "./omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.1/Isaac/Materials/Base/Metals/Aluminum_Cast.mdl",
+            "target_hash": "9503fa97217960766fa02b42de64e05041b4df8e"
+        },
+        {
+            "source_url": "/home/rokey/cobot3_ws/isaacpjt/M0609/Collected_m0609_camera/omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.1/Isaac/Materials/Base/Plastics/Plastic_ABS.mdl",
+            "source_hash": "fb3cc236e14111181622a154e6363f8a6f4357c0",
+            "target_url": "./omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.1/Isaac/Materials/Base/Plastics/Plastic_ABS.mdl",
+            "target_hash": "231cdbc314bf867e1567c8405b92a39cb2157495"
+        },
+        {
+            "source_url": "/home/rokey/cobot3_ws/isaacpjt/M0609/Collected_m0609_camera/omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.1/Isaac/Materials/Base/Metals/Aluminum_Anodized/Aluminum_Anodized_BaseColor.png",
+            "source_hash": "24c20dce4ae193ba096c155e1a10a6f48fabab8a",
+            "target_url": "./omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.1/Isaac/Materials/Base/Metals/Aluminum_Anodized/Aluminum_Anodized_BaseColor.png",
+            "target_hash": "62333475ce8d6d8aaba442c2bc83a4bf5152737f"
+        },
+        {
+            "source_url": "/home/rokey/cobot3_ws/isaacpjt/M0609/Collected_m0609_camera/omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.1/Isaac/Materials/Base/Metals/Aluminum_Cast/Aluminum_Cast_BaseColor.png",
+            "source_hash": "6a3f2628b5b61d6807cc7983d347cde75d41d5d6",
+            "target_url": "./omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.1/Isaac/Materials/Base/Metals/Aluminum_Cast/Aluminum_Cast_BaseColor.png",
+            "target_hash": "cdcada9e4735ee183722119401ec469f21f1dfc5"
+        },
+        {
+            "source_url": "/home/rokey/cobot3_ws/isaacpjt/M0609/Collected_m0609_camera/omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.1/Isaac/Materials/Base/Metals/Aluminum_Anodized/Aluminum_Anodized_ORM.png",
+            "source_hash": "0a72f3d87f8a5353e43e58a2259334a7e236330b",
+            "target_url": "./omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.1/Isaac/Materials/Base/Metals/Aluminum_Anodized/Aluminum_Anodized_ORM.png",
+            "target_hash": "13429e9c10bf05fc1ec3c6a147aefe18ae7920ca"
+        },
+        {
+            "source_url": "/home/rokey/cobot3_ws/isaacpjt/M0609/Collected_m0609_camera/omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.1/Isaac/Materials/Base/Metals/Aluminum_Cast/Aluminum_Cast_ORM.png",
+            "source_hash": "816bff85baea9cb2fcb04dc6270c5d01494d2f70",
+            "target_url": "./omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.1/Isaac/Materials/Base/Metals/Aluminum_Cast/Aluminum_Cast_ORM.png",
+            "target_hash": "1986ce51c5e1c56342bcfb3d33de13f7dfe0b72b"
+        },
+        {
+            "source_url": "/home/rokey/cobot3_ws/isaacpjt/M0609/Collected_m0609_camera/omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.1/Isaac/Materials/Base/Metals/Aluminum_Anodized/Aluminum_Anodized_Normal.png",
+            "source_hash": "f6c55e5ae63cd2c3b3c34251cee9835571c23461",
+            "target_url": "./omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.1/Isaac/Materials/Base/Metals/Aluminum_Anodized/Aluminum_Anodized_Normal.png",
+            "target_hash": "d84fe87703b02ffaedf1818e5effb24d29efaa0e"
+        },
+        {
+            "source_url": "/home/rokey/cobot3_ws/isaacpjt/M0609/Collected_m0609_camera/omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.1/Isaac/Materials/Base/Metals/Aluminum_Cast/Aluminum_Cast_N.png",
+            "source_hash": "dedd8249e80746107afb047c4ab960dd4e7f5c2c",
+            "target_url": "./omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.1/Isaac/Materials/Base/Metals/Aluminum_Cast/Aluminum_Cast_N.png",
+            "target_hash": "cfc28fba2ba01e637446dc5cf60e3817007fdee5"
+        }
+    ]
+}
