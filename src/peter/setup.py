@@ -24,7 +24,9 @@ setup(
     },
     entry_points={
         'console_scripts': [
-            'color_detector = peter.color_detector:main'
+            'color_detector = peter.color_detector:main',
+            'laserscan_self_filter = peter.laserscan_self_filter:main',
+            'ocr_test = peter.ocr_test:main',
         ],
     },
 )

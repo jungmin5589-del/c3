@@ -7,7 +7,9 @@
   <maintainer email="haebyuk35@gmail.com">peter-msi</maintainer>
   <license>TODO: License declaration</license>
 
+  <depend>cv_bridge</depend>
   <depend>rclpy</depend>
+  <depend>sensor_msgs</depend>
   <depend>std_msgs</depend>
 
   <test_depend>ament_copyright</test_depend>

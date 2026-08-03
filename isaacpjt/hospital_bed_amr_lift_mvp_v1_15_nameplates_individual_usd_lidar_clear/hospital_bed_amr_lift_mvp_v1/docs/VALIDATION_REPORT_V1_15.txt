@@ -1,0 +1,14 @@
+VALIDATION REPORT v1.15
+
+PASS: JSON parse
+PASS: Python py_compile
+PASS: Shell bash -n
+PASS: USDA header/defaultPrim/braces static checks
+PASS: 3 nameplate USDs contain OmniPBR diffuse textures
+PASS: nameplate center X=1.015, Y=0.0, Z=0.67
+PASS: nameplate center is halfway between caster Y=+0.40 and Y=-0.40
+PASS: AMR1/AMR2 use Example_Rotary_2D
+PASS: lidar_link world Z=0.285 / base_link offset Z=0.200
+PASS: LiDAR housing top is 0.030 m below scan plane
+PASS: all relative asset files exist
+NOT RUN: Isaac Sim 5.1 runtime render/physics/ROS sensor validation

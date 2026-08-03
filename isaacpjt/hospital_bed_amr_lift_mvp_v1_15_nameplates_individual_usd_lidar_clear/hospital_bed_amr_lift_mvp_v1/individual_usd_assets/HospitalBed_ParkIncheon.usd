@@ -1,0 +1,362 @@
+#usda 1.0
+(
+    defaultPrim = "HospitalBed_ParkIncheon"
+    metersPerUnit = 1
+    upAxis = "Z"
+)
+
+def Xform "HospitalBed_ParkIncheon" (
+    kind = "component"
+    prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI", "PhysxRigidBodyAPI"]
+)
+{
+    custom string hospitalBed:name = "HospitalBed_ParkIncheon"
+    custom string hospitalBed:patientName = "박인천"
+    custom string hospitalBed:patientBirthDate = "1960-07-23"
+    custom string hospitalBed:nameplateAlignment = "exact center: x=+1.015 m, y=0.0 m, z=0.67 m"
+    bool physics:rigidBodyEnabled = 1
+    bool physics:kinematicEnabled = 0
+    float physics:mass = 80
+    bool physxRigidBody:enableCCD = 1
+
+    def Xform "VisualOffset"
+    {
+        double3 xformOp:translate = (0.001487525, -0.001642485, 0.536448)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "VisualOrientation"
+        {
+            float3 xformOp:rotateXYZ = (90, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:rotateXYZ"]
+
+            def Xform "VisualReference" (
+                prepend references = @./shared/bed_amr_clear_front_rear_open.glb@
+            )
+            {
+            }
+        }
+    }
+
+    def Scope "Colliders"
+    {
+    def Cube "Mattress" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        double size = 1
+        double3 xformOp:translate = (0, 0, 0.76)
+        float3 xformOp:scale = (1.95, 0.92, 0.18)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        color3f[] primvars:displayColor = [(0.5, 0.5, 0.5)]
+        token visibility = "invisible"
+    }
+    def Cube "SideFrameLeft" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        double size = 1
+        double3 xformOp:translate = (0, 0.48, 0.46)
+        float3 xformOp:scale = (1.8, 0.055, 0.12)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        color3f[] primvars:displayColor = [(0.5, 0.5, 0.5)]
+        token visibility = "invisible"
+    }
+    def Cube "SideFrameRight" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        double size = 1
+        double3 xformOp:translate = (0, -0.48, 0.46)
+        float3 xformOp:scale = (1.8, 0.055, 0.12)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        color3f[] primvars:displayColor = [(0.5, 0.5, 0.5)]
+        token visibility = "invisible"
+    }
+    def Cube "FrontPostLeft" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        double size = 1
+        double3 xformOp:translate = (0.92, 0.395, 0.52)
+        float3 xformOp:scale = (0.07, 0.16, 0.52)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        color3f[] primvars:displayColor = [(0.5, 0.5, 0.5)]
+        token visibility = "invisible"
+    }
+    def Cube "FrontPostRight" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        double size = 1
+        double3 xformOp:translate = (0.92, -0.395, 0.52)
+        float3 xformOp:scale = (0.07, 0.16, 0.52)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        color3f[] primvars:displayColor = [(0.5, 0.5, 0.5)]
+        token visibility = "invisible"
+    }
+    def Cube "FrontTop" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        double size = 1
+        double3 xformOp:translate = (0.92, 0, 0.72)
+        float3 xformOp:scale = (0.07, 0.95, 0.12)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        color3f[] primvars:displayColor = [(0.5, 0.5, 0.5)]
+        token visibility = "invisible"
+    }
+    def Cube "RearPostLeft" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        double size = 1
+        double3 xformOp:translate = (-0.92, 0.395, 0.52)
+        float3 xformOp:scale = (0.07, 0.16, 0.52)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        color3f[] primvars:displayColor = [(0.5, 0.5, 0.5)]
+        token visibility = "invisible"
+    }
+    def Cube "RearPostRight" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        double size = 1
+        double3 xformOp:translate = (-0.92, -0.395, 0.52)
+        float3 xformOp:scale = (0.07, 0.16, 0.52)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        color3f[] primvars:displayColor = [(0.5, 0.5, 0.5)]
+        token visibility = "invisible"
+    }
+    def Cube "RearTop" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        double size = 1
+        double3 xformOp:translate = (-0.92, 0, 0.72)
+        float3 xformOp:scale = (0.07, 0.95, 0.12)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        color3f[] primvars:displayColor = [(0.5, 0.5, 0.5)]
+        token visibility = "invisible"
+    }
+    def Cube "LegRearRight" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        double size = 1
+        double3 xformOp:translate = (-0.82, -0.4, 0.24)
+        float3 xformOp:scale = (0.07, 0.07, 0.34)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        color3f[] primvars:displayColor = [(0.5, 0.5, 0.5)]
+        token visibility = "invisible"
+    }
+    def Cylinder "WheelRearRight" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        uniform token axis = "Y"
+        double radius = 0.055
+        double height = 0.035
+        double3 xformOp:translate = (-0.82, -0.4, 0.055)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+        color3f[] primvars:displayColor = [(0.12, 0.12, 0.14)]
+    }
+    def Cube "LegRearLeft" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        double size = 1
+        double3 xformOp:translate = (-0.82, 0.4, 0.24)
+        float3 xformOp:scale = (0.07, 0.07, 0.34)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        color3f[] primvars:displayColor = [(0.5, 0.5, 0.5)]
+        token visibility = "invisible"
+    }
+    def Cylinder "WheelRearLeft" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        uniform token axis = "Y"
+        double radius = 0.055
+        double height = 0.035
+        double3 xformOp:translate = (-0.82, 0.4, 0.055)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+        color3f[] primvars:displayColor = [(0.12, 0.12, 0.14)]
+    }
+    def Cube "LegFrontRight" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        double size = 1
+        double3 xformOp:translate = (0.82, -0.4, 0.24)
+        float3 xformOp:scale = (0.07, 0.07, 0.34)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        color3f[] primvars:displayColor = [(0.5, 0.5, 0.5)]
+        token visibility = "invisible"
+    }
+    def Cylinder "WheelFrontRight" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        uniform token axis = "Y"
+        double radius = 0.055
+        double height = 0.035
+        double3 xformOp:translate = (0.82, -0.4, 0.055)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+        color3f[] primvars:displayColor = [(0.12, 0.12, 0.14)]
+    }
+    def Cube "LegFrontLeft" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        double size = 1
+        double3 xformOp:translate = (0.82, 0.4, 0.24)
+        float3 xformOp:scale = (0.07, 0.07, 0.34)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        color3f[] primvars:displayColor = [(0.5, 0.5, 0.5)]
+        token visibility = "invisible"
+    }
+    def Cylinder "WheelFrontLeft" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        uniform token axis = "Y"
+        double radius = 0.055
+        double height = 0.035
+        double3 xformOp:translate = (0.82, 0.4, 0.055)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+        color3f[] primvars:displayColor = [(0.12, 0.12, 0.14)]
+    }
+    }
+
+    def Xform "LiftAdapter"
+    {
+        def Cube "LiftRailLeft" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+        {
+            double size = 1
+            double3 xformOp:translate = (0, 0.145, 0.19)
+            float3 xformOp:scale = (0.58, 0.075, 0.035)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+            color3f[] primvars:displayColor = [(0.16, 0.62, 0.72)]
+        }
+        def Cube "LiftRailRight" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+        {
+            double size = 1
+            double3 xformOp:translate = (0, -0.145, 0.19)
+            float3 xformOp:scale = (0.58, 0.075, 0.035)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+            color3f[] primvars:displayColor = [(0.16, 0.62, 0.72)]
+        }
+        def Cube "HangerFrontLeft"
+        {
+            double size = 1
+            double3 xformOp:translate = (0.24, 0.145, 0.305)
+            float3 xformOp:scale = (0.045, 0.045, 0.2)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+            color3f[] primvars:displayColor = [(0.16, 0.62, 0.72)]
+        }
+        def Cube "HangerFrontRight"
+        {
+            double size = 1
+            double3 xformOp:translate = (0.24, -0.145, 0.305)
+            float3 xformOp:scale = (0.045, 0.045, 0.2)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+            color3f[] primvars:displayColor = [(0.16, 0.62, 0.72)]
+        }
+        def Cube "UpperBridgeFront"
+        {
+            double size = 1
+            double3 xformOp:translate = (0.24, 0, 0.405)
+            float3 xformOp:scale = (0.055, 0.34, 0.04)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+            color3f[] primvars:displayColor = [(0.16, 0.62, 0.72)]
+        }
+        def Cube "ConnectionBeamFront"
+        {
+            double size = 1
+            double3 xformOp:translate = (0.24, 0, 0.42)
+            float3 xformOp:scale = (0.065, 0.94, 0.05)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+            color3f[] primvars:displayColor = [(0.16, 0.62, 0.72)]
+        }
+        def Cube "HangerRearLeft"
+        {
+            double size = 1
+            double3 xformOp:translate = (-0.24, 0.145, 0.305)
+            float3 xformOp:scale = (0.045, 0.045, 0.2)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+            color3f[] primvars:displayColor = [(0.16, 0.62, 0.72)]
+        }
+        def Cube "HangerRearRight"
+        {
+            double size = 1
+            double3 xformOp:translate = (-0.24, -0.145, 0.305)
+            float3 xformOp:scale = (0.045, 0.045, 0.2)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+            color3f[] primvars:displayColor = [(0.16, 0.62, 0.72)]
+        }
+        def Cube "UpperBridgeRear"
+        {
+            double size = 1
+            double3 xformOp:translate = (-0.24, 0, 0.405)
+            float3 xformOp:scale = (0.055, 0.34, 0.04)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+            color3f[] primvars:displayColor = [(0.16, 0.62, 0.72)]
+        }
+        def Cube "ConnectionBeamRear"
+        {
+            double size = 1
+            double3 xformOp:translate = (-0.24, 0, 0.42)
+            float3 xformOp:scale = (0.065, 0.94, 0.05)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+            color3f[] primvars:displayColor = [(0.16, 0.62, 0.72)]
+        }
+    }
+
+    def Scope "Looks"
+    {
+        def Material "NameplateOmniPBR"
+        {
+            token outputs:mdl:surface.connect = </HospitalBed_ParkIncheon/Looks/NameplateOmniPBR/Shader.outputs:out>
+
+            def Shader "Shader"
+            {
+                uniform token info:implementationSource = "sourceAsset"
+                uniform asset info:mdl:sourceAsset = @OmniPBR.mdl@
+                uniform token info:mdl:sourceAsset:subIdentifier = "OmniPBR"
+                asset inputs:diffuse_texture = @./textures/nameplate_park_incheon.png@
+                color3f inputs:diffuse_color_constant = (1, 1, 1)
+                float inputs:roughness_constant = 0.35
+                float inputs:metallic_constant = 0
+                bool inputs:project_uvw = 0
+                token outputs:out
+            }
+        }
+    }
+
+    def Xform "Nameplate"
+    {
+        def Mesh "Plane" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            uniform bool doubleSided = 1
+            int[] faceVertexCounts = [4]
+            int[] faceVertexIndices = [0, 1, 2, 3]
+            point3f[] points = [(0, -0.31, -0.215), (0, 0.31, -0.215), (0, 0.31, 0.215), (0, -0.31, 0.215)]
+            normal3f[] normals = [(1, 0, 0)] (
+                interpolation = "constant"
+            )
+            texCoord2f[] primvars:st = [(0, 0), (1, 0), (1, 1), (0, 1)] (
+                interpolation = "faceVarying"
+            )
+            rel material:binding = </HospitalBed_ParkIncheon/Looks/NameplateOmniPBR>
+            double3 xformOp:translate = (1.015, 0, 0.67)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+    }
+
+}

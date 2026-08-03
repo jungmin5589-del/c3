@@ -1,0 +1,531 @@
+{
+  "stage": {
+    "meters_per_unit": 1.0,
+    "up_axis": "Z",
+    "physics_steps_per_second": 120,
+    "gravity": -9.81
+  },
+  "amr": {
+    "root_path": "/World/AMR1",
+    "start_position": [
+      -2.0,
+      -1.25,
+      0.0
+    ],
+    "base_size": [
+      0.8,
+      0.52,
+      0.08
+    ],
+    "base_center_z": 0.085,
+    "base_mass_kg": 80.0,
+    "wheel_radius": 0.075,
+    "wheel_width": 0.045,
+    "wheel_mass_kg": 2.0,
+    "wheel_x": 0.3,
+    "wheel_y": 0.2825,
+    "wheel_center_z": 0.075,
+    "wheel_drive_damping": 1800.0,
+    "wheel_drive_max_force": 2500.0,
+    "lift_plate_size": [
+      0.65,
+      0.42,
+      0.02
+    ],
+    "lift_plate_center_z": 0.145,
+    "lift_plate_mass_kg": 15.0,
+    "lift_lower_limit_m": 0.0,
+    "lift_upper_limit_m": 0.035,
+    "lift_test_target_m": 0.025,
+    "lift_stiffness": 220000.0,
+    "lift_damping": 9000.0,
+    "lift_max_force_n": 6500.0,
+    "support_pad_size": [
+      0.56,
+      0.085,
+      0.015
+    ],
+    "support_pad_y": 0.145,
+    "support_pad_center_z": 0.0175,
+    "camera_position": [
+      0.39,
+      0.0,
+      0.16
+    ],
+    "camera_pitch_deg": 5.0,
+    "lidar_position": [
+      0.0,
+      0.0,
+      0.285
+    ],
+    "imu_position": [
+      0.0,
+      0.0,
+      0.11
+    ],
+    "lidar_config": "Example_Rotary_2D",
+    "front_camera_position": [
+      0.39,
+      0.0,
+      0.16
+    ],
+    "front_camera_pitch_deg": 5.0,
+    "front_camera_yaw_deg": 0.0,
+    "rear_camera_position": [
+      -0.39,
+      0.0,
+      0.16
+    ],
+    "rear_camera_pitch_deg": 5.0,
+    "rear_camera_yaw_deg": 180.0,
+    "lidar_housing_radius_m": 0.055,
+    "lidar_housing_height_m": 0.025,
+    "lidar_mount_size": [
+      0.065,
+      0.065,
+      0.12
+    ],
+    "lidar_mount_center_z": 0.185,
+    "lidar_visibility_description": "One Example_Rotary_2D RTX LiDAR per AMR. Sensor origin is centered at x=0, y=0, z=0.285 m. The visible pedestal and housing are entirely below the scan plane; the nearest visible housing surface is at least 0.030 m below the lidar_link origin, preventing 360-degree self-occlusion.",
+    "lidar_housing_center_offset_z_m": -0.0425,
+    "lidar_scan_plane_clearance_m": 0.03
+  },
+  "bed": {
+    "enabled": true,
+    "mass_kg": 80.0,
+    "support_rail_height_m": 0.19,
+    "support_rail_size": [
+      0.58,
+      0.075,
+      0.035
+    ],
+    "support_rail_y": 0.145,
+    "mattress_size": [
+      1.95,
+      0.92,
+      0.18
+    ],
+    "mattress_center_z": 0.76,
+    "side_frame_size": [
+      1.8,
+      0.055,
+      0.12
+    ],
+    "side_frame_y": 0.48,
+    "side_frame_center_z": 0.46,
+    "end_frame_size": [
+      0.07,
+      0.95,
+      0.52
+    ],
+    "end_frame_x": 0.92,
+    "end_frame_center_z": 0.52,
+    "leg_size": [
+      0.07,
+      0.07,
+      0.34
+    ],
+    "leg_x": 0.82,
+    "leg_y": 0.4,
+    "leg_center_z": 0.24,
+    "wheel_proxy_radius": 0.055,
+    "wheel_proxy_width": 0.035,
+    "wheel_proxy_center_z": 0.055,
+    "adapter_hanger_x": 0.24,
+    "adapter_hanger_center_z": 0.305,
+    "adapter_hanger_size": [
+      0.045,
+      0.045,
+      0.2
+    ],
+    "adapter_bridge_center_z": 0.405,
+    "adapter_bridge_size": [
+      0.055,
+      0.34,
+      0.04
+    ],
+    "adapter_contact_marker_size": [
+      0.22,
+      0.082,
+      0.008
+    ],
+    "rear_open_edit": {
+      "enabled": true,
+      "source_axis": "Y-up",
+      "removed_region_source_coordinates": {
+        "x_min": -0.9,
+        "x_max": -0.68,
+        "y_min": -0.46,
+        "y_max": -0.27,
+        "abs_z_max": 0.36
+      },
+      "description": "Rear central horizontal crossbar faces are removed. The left and right caster-support columns remain.",
+      "rear_hidden_collider_removed": true,
+      "entry_direction": "negative X / foot side",
+      "superseded_by": "front_rear_open_edit"
+    },
+    "adapter_connection_beam_center_z": 0.42,
+    "adapter_connection_beam_size": [
+      0.065,
+      0.94,
+      0.05
+    ],
+    "adapter_mount_plate_y": 0.455,
+    "adapter_mount_plate_center_z": 0.455,
+    "adapter_mount_plate_size": [
+      0.12,
+      0.06,
+      0.11
+    ],
+    "adapter_visual_connection_description": "Two transverse connection beams and four mount plates visibly join the lift adapter to the bed side frame. They are children of the bed rigid body and move with the bed.",
+    "front_rear_open_edit": {
+      "enabled": true,
+      "source_axis": "Y-up",
+      "rear_removed_region_source_coordinates": {
+        "x_min": -0.9,
+        "x_max": -0.68,
+        "y_min": -0.46,
+        "y_max": -0.27,
+        "abs_z_max": 0.36
+      },
+      "front_removed_region_source_coordinates": {
+        "x_min": 0.68,
+        "x_max": 0.9,
+        "y_min": -0.46,
+        "y_max": -0.27,
+        "abs_z_max": 0.36
+      },
+      "description": "The lower central crossbar faces are removed at both longitudinal ends. Left and right caster-support columns remain, so the AMR can approach the lift adapter from either end.",
+      "front_hidden_collider_split": true,
+      "rear_hidden_collider_removed": true,
+      "entry_directions": [
+        "positive X / head side",
+        "negative X / foot side"
+      ]
+    },
+    "end_frame_open_center_enabled": true,
+    "end_frame_post_size": [
+      0.07,
+      0.16,
+      0.52
+    ],
+    "end_frame_post_y": 0.395,
+    "end_frame_top_size": [
+      0.07,
+      0.95,
+      0.12
+    ],
+    "end_frame_top_center_z": 0.72,
+    "nameplate_enabled": true,
+    "nameplate_end": "positive_x",
+    "nameplate_center_x_m": 1.015,
+    "nameplate_center_y_m": 0.0,
+    "nameplate_center_z_m": 0.67,
+    "nameplate_width_m": 0.62,
+    "nameplate_height_m": 0.43,
+    "nameplate_surface_offset_m": 0.005,
+    "nameplate_exact_center_description": "The plane center is Y=0.0 m, exactly halfway between the two end caster centers at Y=+0.40 m and Y=-0.40 m. It is mounted on the +X end."
+  },
+  "materials": {
+    "ground_static_friction": 1.0,
+    "ground_dynamic_friction": 0.85,
+    "wheel_static_friction": 1.25,
+    "wheel_dynamic_friction": 1.05,
+    "lift_static_friction": 1.35,
+    "lift_dynamic_friction": 1.15,
+    "restitution": 0.0,
+    "bed_caster_static_friction": 0.12,
+    "bed_caster_dynamic_friction": 0.08
+  },
+  "demo": {
+    "settle_seconds": 2.0,
+    "lift_seconds": 3.0,
+    "hold_seconds": 2.0,
+    "drive_seconds": 4.0,
+    "wheel_target_velocity_deg_s": 520.0,
+    "lower_seconds": 3.0
+  },
+  "control": {
+    "mode": "demo_direct_holonomic_velocity",
+    "unloaded_linear_speed_mps": 1.7,
+    "unloaded_lateral_speed_mps": 1.7,
+    "unloaded_angular_speed_rad_s": 2.8,
+    "loaded_linear_speed_mps": 0.9,
+    "loaded_lateral_speed_mps": 0.76,
+    "loaded_angular_speed_rad_s": 1.3,
+    "lift_loaded_threshold_m": 0.006,
+    "lift_command_speed_mps": 0.012,
+    "wheel_visual_velocity_limit_deg_s": 1800.0,
+    "emergency_stop_key": "SPACE",
+    "unloaded_linear_accel_mps2": 8.0,
+    "loaded_linear_accel_mps2": 4.0,
+    "unloaded_angular_accel_rad_s2": 10.0,
+    "loaded_angular_accel_rad_s2": 5.0,
+    "keymap": {
+      "amr1": {
+        "forward": "W",
+        "reverse": "S",
+        "steer_left": "A",
+        "steer_right": "D",
+        "strafe_left": "Q",
+        "strafe_right": "E",
+        "lift_up": "R",
+        "lift_down": "V",
+        "magnet_toggle": "LEFT_SHIFT",
+        "emergency_stop": "SPACE",
+        "magnet_lock": "C",
+        "magnet_release": "X"
+      },
+      "amr2": {
+        "forward": "UP",
+        "reverse": "DOWN",
+        "steer_left": "LEFT",
+        "steer_right": "RIGHT",
+        "lift_up": "LEFT_BRACKET",
+        "lift_down": "RIGHT_BRACKET",
+        "magnet_toggle": "RIGHT_SHIFT",
+        "emergency_stop": "ENTER",
+        "strafe_modifier": "SLASH",
+        "strafe_left": "COMMA",
+        "strafe_right": "PERIOD",
+        "magnet_lock": "BACKSLASH",
+        "magnet_release": "BACKSPACE"
+      }
+    },
+    "unloaded_lateral_accel_mps2": 10.0,
+    "loaded_lateral_accel_mps2": 5.6,
+    "ros_command_timeout_s": 0.6,
+    "keyboard_robot_switch_key": "DISABLED_DUAL_KEYBOARD",
+    "keyboard_has_priority": true,
+    "speed_profile": "v1.15_nameplates_individual_usd_lidar_clear"
+  },
+  "sensors": {
+    "camera_prim": "/World/AMR1/base_link/front_camera_link/Camera",
+    "camera_frame_id": "amr1/front_camera_link",
+    "camera_resolution": [
+      640,
+      360
+    ],
+    "camera_frequency_hz": 15,
+    "camera_rgb_topic": "camera/front/color/image_raw",
+    "camera_depth_topic": "camera/front/depth/image_raw",
+    "camera_info_topic": "camera/front/camera_info",
+    "lidar_prim": "/World/AMR1/base_link/lidar_link/RtxLidar",
+    "lidar_frame_id": "amr1/lidar_link",
+    "lidar_scan_topic": "scan",
+    "lidar_pointcloud_topic": "point_cloud",
+    "lidar_config": "Example_Rotary_2D",
+    "ros_domain_id": 120,
+    "camera_prim_suffix": "base_link/front_camera_link/Camera",
+    "lidar_prim_suffix": "base_link/lidar_link/RtxLidar",
+    "camera_frame_suffix": "front_camera_link",
+    "lidar_frame_suffix": "lidar_link",
+    "odom_topic": "odom",
+    "cmd_vel_topic": "cmd_vel",
+    "lift_cmd_topic": "lift_cmd",
+    "magnet_cmd_topic": "magnet_cmd",
+    "estop_topic": "estop",
+    "bed_attached_topic": "bed_attached",
+    "magnet_strength_topic": "magnet_strength",
+    "magnet_lock_topic": "magnet_lock",
+    "magnet_release_topic": "magnet_release",
+    "camera_count_per_amr": 2,
+    "cameras": [
+      {
+        "name": "front",
+        "prim_suffix": "base_link/front_camera_link/Camera",
+        "frame_suffix": "front_camera_link",
+        "rgb_topic": "camera/front/color/image_raw",
+        "depth_topic": "camera/front/depth/image_raw",
+        "camera_info_topic": "camera/front/camera_info"
+      },
+      {
+        "name": "rear",
+        "prim_suffix": "base_link/rear_camera_link/Camera",
+        "frame_suffix": "rear_camera_link",
+        "rgb_topic": "camera/rear/color/image_raw",
+        "depth_topic": "camera/rear/depth/image_raw",
+        "camera_info_topic": "camera/rear/camera_info"
+      }
+    ],
+    "lidar_fov_description": "Example_Rotary_2D rotary sensor. One centered LiDAR publishes one 360-degree LaserScan and PointCloud2 stream per AMR.",
+    "camera_warmup_frames": 8,
+    "camera_queue_size": 2,
+    "camera_runtime_fix": "v1.14.1_double_initialize_and_sdg_warmup"
+  },
+  "magnetic_dock": {
+    "enabled": true,
+    "auto_enabled_on_start": true,
+    "toggle_key": "M",
+    "bed_body_path": "/World/HospitalBed",
+    "amr_base_path": "/World/HospitalBedAMR/base_link",
+    "amr_lift_body_path": "/World/HospitalBedAMR/lift_plate",
+    "joint_path": "/World/HospitalBedAMR/Joints/magnetic_bed_joint",
+    "capture_distance_m": 0.45,
+    "lock_distance_m": 0.12,
+    "lock_angle_deg": 15.0,
+    "minimum_lift_for_lock_m": 0.012,
+    "release_lift_height_m": 0.006,
+    "position_gain": 4.0,
+    "yaw_gain": 4.0,
+    "max_assist_linear_speed_mps": 0.22,
+    "max_assist_lateral_speed_mps": 0.22,
+    "max_assist_angular_speed_rad_s": 0.75,
+    "disable_collision_between_attached_bodies": true,
+    "candidate_bed_paths": [
+      "/World/HospitalBed1",
+      "/World/HospitalBed2",
+      "/World/HospitalBed3"
+    ],
+    "joint_name": "magnetic_bed_joint",
+    "coupling_mode": "wheel_tow",
+    "coupling_mode_options": [
+      "wheel_tow",
+      "lift_carry"
+    ],
+    "strength_percent": 100.0,
+    "minimum_strength_percent": 10.0,
+    "maximum_strength_percent": 100.0,
+    "break_force_min_n": 1000000.0,
+    "break_force_max_n": 1000000.0,
+    "break_torque_min_nm": 1000000.0,
+    "break_torque_max_nm": 1000000.0,
+    "scale_alignment_assist_with_strength": true,
+    "wheel_tow_contact_lift_m": 0.0025,
+    "wheel_tow_max_lift_m": 0.0035,
+    "wheel_tow_release_on_lift_lowered": false,
+    "wheel_tow_description": "Bed casters remain on the floor. The lift plate only closes the small adapter gap and a breakable magnetic FixedJoint tows the bed, so the AMR mainly overcomes rolling resistance instead of carrying the full bed weight.",
+    "lift_carry_description": "Legacy mode. Raise the lift above minimum_lift_for_lock_m and carry the bed with the casters unloaded.",
+    "wheel_tow_minimum_lift_for_lock_m": 0.0,
+    "manual_lock_required": true,
+    "auto_lock_enabled": false,
+    "manual_lock_capture_distance_m": 0.3,
+    "manual_lock_max_yaw_error_deg": 20.0,
+    "snap_on_manual_lock": true,
+    "snap_bed_to_amr_center": true,
+    "snap_zero_velocities": true,
+    "unbreakable_joint": true,
+    "require_lift_height_for_manual_lock": false,
+    "lock_feedback_text": "CLACK! MAGNETIC HARD LOCK",
+    "manual_lock_description": "Magnet toggle only arms the docking system. Press the dedicated lock key near a bed. The bed is snapped in planar pose to the AMR center and an unbreakable FixedJoint is created. The joint can only be removed by the dedicated release key, magnet OFF, or application shutdown."
+  },
+  "map": {
+    "usd_path": "",
+    "prim_path": "/World/HospitalMap",
+    "position": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "rotation_deg": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "use_ground_plane_when_empty": true,
+    "use_ground_plane_when_map_present": false,
+    "description": "Set HOSPITAL_MAP_USD or pass --map-usd to reference a hospital map into the generated stage."
+  },
+  "fleet": [
+    {
+      "name": "AMR1",
+      "root_path": "/World/AMR1",
+      "namespace": "amr1",
+      "start_position": [
+        -2.0,
+        -1.25,
+        0.0
+      ],
+      "start_yaw_deg": 0.0,
+      "color": [
+        0.08,
+        0.3,
+        0.62
+      ],
+      "camera_enabled": true,
+      "lidar_enabled": true,
+      "keyboard_enabled": true,
+      "camera_count": 2
+    },
+    {
+      "name": "AMR2",
+      "root_path": "/World/AMR2",
+      "namespace": "amr2",
+      "start_position": [
+        -2.0,
+        1.25,
+        0.0
+      ],
+      "start_yaw_deg": 0.0,
+      "color": [
+        0.12,
+        0.55,
+        0.28
+      ],
+      "camera_enabled": true,
+      "lidar_enabled": true,
+      "keyboard_enabled": true,
+      "camera_count": 2
+    }
+  ],
+  "beds": [
+    {
+      "name": "Bed1",
+      "root_path": "/World/HospitalBed1",
+      "position": [
+        1.5,
+        -2.0,
+        0.0
+      ],
+      "yaw_deg": 0.0,
+      "patient_name": "서수원",
+      "patient_birth_date": "1990-02-10",
+      "nameplate_texture": "assets/nameplates/nameplate_seo_suwon.png",
+      "nameplate_key": "seo_suwon"
+    },
+    {
+      "name": "Bed2",
+      "root_path": "/World/HospitalBed2",
+      "position": [
+        1.5,
+        0.0,
+        0.0
+      ],
+      "yaw_deg": 0.0,
+      "patient_name": "김서울",
+      "patient_birth_date": "2000-11-02",
+      "nameplate_texture": "assets/nameplates/nameplate_kim_seoul.png",
+      "nameplate_key": "kim_seoul"
+    },
+    {
+      "name": "Bed3",
+      "root_path": "/World/HospitalBed3",
+      "position": [
+        1.5,
+        2.0,
+        0.0
+      ],
+      "yaw_deg": 0.0,
+      "patient_name": "박인천",
+      "patient_birth_date": "1960-07-23",
+      "nameplate_texture": "assets/nameplates/nameplate_park_incheon.png",
+      "nameplate_key": "park_incheon"
+    }
+  ],
+  "navigation": {
+    "enabled": true,
+    "clock_topic": "/clock",
+    "clock_publish_rate_hz": 60.0,
+    "state_publish_rate_hz": 30.0,
+    "odom_zero_at_start": true,
+    "publish_world_to_odom_for_rviz": true,
+    "world_frame": "world",
+    "description": "Stages 1-6: /clock, namespaced /odom, odom->base_link dynamic TF, base_link->sensor static TF, namespaced /cmd_vel subscribers, and verification scripts. Set publish_world_to_odom_for_rviz=false before SLAM/AMCL so map->odom can be published."
+  },
+  "package_version": "v1.15"
+}

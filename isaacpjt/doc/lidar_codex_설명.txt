@@ -1,0 +1,142 @@
+결론부터 말하면, 방향은 절반은 맞아요.
+
+- 침대 크기를 측정해서 Nav2가 “침대까지 포함한 로봇 크기”로 판단하게 하는 것은 맞습니다.
+- 하지만 그 크기를 LiDAR의 최소 감지 거리로 설정하는 것은 권장하지 않습니다.
+
+현재 모델 기준으로는 침대가 대략 `길이 2.00 m × 폭 1.31 m`이고, 중앙에서 모서리까지 약 `1.20 m`입니다. LiDAR 최소 거리를 1.2m로 만들면 로봇 주변 360°의 1.2m 안에 들어온 사람, 벽, 기둥을 전부 무시하는 위험한 사각지대가 생깁니다.
+
+## 각각 다른 방법으로 해결해야 합니다
+
+| 문제 | 해결 방법 |
+|---|---|
+| 침대 프레임이 LiDAR에 찍힘 | Self-filter 또는 LiDAR 위치 변경 |
+| Nav2가 침대 크기를 모름 | AMR+침대 크기의 polygon footprint 설정 |
+| 장애물과 여유 간격 확보 | `footprint_padding`, `inflation_radius` |
+| 침대 프레임이 LiDAR 광선을 실제로 가림 | LiDAR를 위로 올리거나 앞·뒤 LiDAR 사용 |
+
+LiDAR 스캔이 침대 프레임에 먼저 부딪힌 경우, 나중에 그 점을 필터로 지워도 프레임 뒤쪽 장애물이 다시 보이는 것은 아닙니다. 따라서 필터는 “침대가 장애물로 표시되는 현상”은 해결하지만, 물리적인 가림 현상 자체는 해결하지 못합니다.
+
+## 권장 구조
+
+```text
+/amr1/scan
+     │
+     ▼
+침대 Self-filter
+     │
+     ▼
+/amr1/scan_filtered
+     ├── SLAM Toolbox 또는 AMCL
+     └── Nav2 local/global costmap
+
+
+/amr1/bed_attached
+     │
+     ▼
+Footprint 변경 노드
+     ├── 침대 분리: 작은 AMR footprint
+     └── 침대 결합: AMR+침대 footprint
+```
+
+Nav2는 원형 `robot_radius` 대신 실제 외곽을 나타내는 polygon footprint를 사용할 수 있고, 결합 장치나 팔레트처럼 외형이 바뀌는 경우 실행 중 footprint를 갱신할 수도 있습니다. [Nav2 footprint 설정 문서](https://docs.nav2.org/setup_guides/footprint/setup_footprint.html)
+
+## 현재 모델에 사용할 시작값
+
+현재 침대가 AMR의 `base_link` 중심으로 결합되는 구조이므로, 다음 정도를 초기값으로 사용할 수 있습니다.
+
+침대 분리 상태:
+
+```yaml
+footprint: "[[0.43, 0.33], [0.43, -0.33], [-0.43, -0.33], [-0.43, 0.33]]"
+footprint_padding: 0.03
+```
+
+침대 결합 상태:
+
+```yaml
+footprint: "[[1.02, 0.68], [1.02, -0.68], [-1.02, -0.68], [-1.02, 0.68]]"
+footprint_padding: 0.05
+```
+
+이 설정은 최종적으로 약 `2.14 × 1.46m`의 안전 영역을 사용하게 됩니다. 실제 침대가 AMR 중심에서 앞이나 뒤로 치우쳐 결합된다면 대칭 좌표가 아니라 다음 네 값을 따로 측정해야 합니다.
+
+```text
+x_front : base_link에서 가장 앞쪽까지
+x_rear  : base_link에서 가장 뒤쪽까지
+y_left  : 가장 왼쪽까지
+y_right : 가장 오른쪽까지
+```
+
+Nav2의 local/global costmap 모두 같은 footprint를 사용해야 합니다.
+
+```yaml
+local_costmap:
+  local_costmap:
+    ros__parameters:
+      footprint: "[[1.02,0.68],[1.02,-0.68],[-1.02,-0.68],[-1.02,0.68]]"
+      footprint_padding: 0.05
+      width: 6.0
+      height: 6.0
+
+      obstacle_layer:
+        footprint_clearing_enabled: true
+        observation_sources: scan
+        scan:
+          topic: /amr1/scan_filtered
+          data_type: LaserScan
+          marking: true
+          clearing: true
+          obstacle_min_range: 0.05
+          raytrace_min_range: 0.0
+
+      inflation_layer:
+        inflation_radius: 0.35
+        cost_scaling_factor: 3.0
+```
+
+`footprint_clearing_enabled: true`는 footprint 안쪽에 생긴 장애물 셀을 costmap에서 지워줍니다. 다만 SLAM에 들어가는 원본 스캔까지 고쳐주는 것은 아니기 때문에 `/scan_filtered`가 별도로 필요합니다. [Nav2 Obstacle Layer 문서](https://docs.nav2.org/configuration/packages/costmap-plugins/obstacle.html)
+
+`inflation_radius`는 로봇 크기가 아니라 장애물 주변에 추가하는 안전 비용 영역입니다. 침대 크기를 inflation으로 다시 더하면 복도를 지나치게 좁게 판단할 수 있습니다. [Nav2 Inflation Layer 문서](https://docs.nav2.org/configuration/packages/costmap-plugins/inflation.html)
+
+## LiDAR는 어떻게 처리하는 것이 좋은가
+
+현재 프로젝트 설정을 보면 중앙 LiDAR 높이가 약 `0.285m`이고, 침대 프레임보다 상당히 낮습니다. 그래서 침대가 결합되면 구조적으로 가려질 가능성이 큽니다. [amr_config.json](</home/peter-msi/cobot3_ws/isaacpjt/hospital_bed_amr_lift_mvp_v1_15_nameplates_individual_usd_lidar_clear/hospital_bed_amr_lift_mvp_v1/config/amr_config.json:56>)
+
+추천 순서는 다음과 같습니다.
+
+1. 단기 MVP: 침대 내부에서 발생한 점을 직사각형 영역으로 필터링합니다.
+
+   ```text
+   /amr1/scan → LaserScan Box Filter → /amr1/scan_filtered
+   ```
+
+2. 안정적인 최종 구성: LiDAR를 침대 난간보다 높은 약 `1.15~1.25m` 위치로 올립니다.
+
+3. 높은 LiDAR가 낮은 장애물을 놓치는 문제는 전·후방 Depth Camera의 PointCloud를 local costmap 또는 Collision Monitor에 추가해 보완합니다.
+
+4. LiDAR를 올릴 수 없다면 침대 앞·뒤 끝에 LiDAR를 배치해 두 스캔을 합치는 방법이 좋습니다. 작업량은 증가하지만 가림 현상에는 가장 강합니다.
+
+## SLAM과 운반 주행도 분리하는 것이 좋습니다
+
+14일 프로젝트라면 다음 방식이 가장 안정적입니다.
+
+1. 침대가 없는 AMR로 병원 맵을 SLAM합니다.
+2. 맵을 저장합니다.
+3. 침대 운반 중에는 저장된 맵에서 AMCL 또는 SLAM Toolbox localization을 사용합니다.
+4. 침대 결합 시 큰 footprint로 변경합니다.
+5. 침대 분리 시 작은 footprint로 되돌립니다.
+
+긴 직사각형 침대는 원형 로봇보다 회전 공간 계산이 어렵습니다. 좁은 복도와 문을 제대로 판단하려면 추후 `SmacPlannerLattice`처럼 비원형·전방향 이동을 고려하는 planner가 적합합니다. [Nav2 알고리즘 선택 가이드](https://docs.nav2.org/setup_guides/algorithm/select_algorithm.html)
+
+한 문장으로 정리하면:
+
+> 침대 크기는 LiDAR 최소 거리로 사용하는 것이 아니라 Nav2 footprint로 사용하고, 침대 자체의 LiDAR 반사는 필터링하며, 실제 가림 현상은 LiDAR 위치 변경 또는 추가 센서로 해결해야 합니다.
+
+그리고 다음 작업 전에 반드시 `/amr1/scan`이 목록에만 존재하는 것이 아니라 실제 발행되는지부터 확인해야 합니다.
+
+```bash
+ros2 topic hz /amr1/scan --wall-time
+ros2 topic echo /amr1/scan --once
+```
+
+여기서 주기가 안 나오면 footprint나 Nav2보다 먼저 Isaac Sim LiDAR 발행 문제를 해결해야 합니다.

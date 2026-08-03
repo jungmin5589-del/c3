@@ -1,0 +1,38 @@
+Hospital Bed AMR v1.14 static validation report
+
+Base package
+- hospital_bed_amr_lift_mvp_v1_13_hard_snap_magnetic_lock.zip
+
+Implemented changes
+- One centered Example_Rotary_2D RTX LiDAR per AMR
+- LiDAR moved to x=0.0, y=0.0, z=0.245 m
+- Visible cyan LiDAR pedestal and larger housing
+- Front and rear RGB-D cameras for AMR1 and AMR2
+- Camera topics split into camera/front/* and camera/rear/*
+- Camera default reduced to 640x360 at 15 Hz for four-camera load
+- Front and rear camera static TF frames
+- Bed GLB lower-center opening mirrored to both longitudinal ends
+- Front hidden collider split into left/right posts and upper beam
+- v1.13 unbreakable hard magnetic lock preserved
+
+Checks completed
+- config/amr_config.json parsed successfully
+- All Python files compiled successfully
+- All shell scripts passed bash -n
+- validate_local.py passed
+- GLB texture visual preserved
+- Original GLB faces: 9512
+- v1.14 GLB faces: 9280
+- Removed faces: 232 total (117 rear + 115 front)
+- Remaining triangles in configured rear opening region: 0
+- Remaining triangles in configured front opening region: 0
+- Front and rear projected opening previews inspected
+
+Not verified in this container
+- Isaac Sim 5.1 RTX LiDAR runtime creation
+- ROS 2 image, LaserScan and PointCloud2 publication
+- Camera orientation in the rendered Isaac Sim viewport
+- Physical clearance while entering from both bed ends
+- SLAM quality and sensor occlusion after the bed is hard-locked
+
+The user must regenerate the USD stage and perform final runtime checks in Isaac Sim 5.1.
