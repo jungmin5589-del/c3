@@ -1,0 +1,13 @@
+이번 수정 범위
+1) 자율주행 속도: 0.48 -> 0.90 m/s
+2) 급가속 방지: Isaac linear acceleration 3.0 -> 1.0 m/s^2
+3) Nav2 smoothing: accel 0.9, decel -1.1 m/s^2
+4) OCR: 10 frames -> 4, variants 6 -> 3
+5) 중앙 확인: 6px x 5회 -> 12px x 2회
+6) OCR 추적 발행: 8 -> 15 Hz
+7) OCR 전진: 0.22 -> 0.32 m/s
+8) 카메라 안정화 대기: 2.0 -> 0.5 sec
+9) OCR 중복 프로세스 자동 종료
+10) 04_run_ocr_mission.sh: OCR + patient_transport_manager 통합 실행
+
+그 외 Nav2 중앙 경로, 풋프린트, 마그네틱, 리프트, 좌표는 변경하지 않음.

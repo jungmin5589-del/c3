@@ -1,0 +1,20 @@
+기준본: hospital_bed_amr_cube_transit_fixed_selected_upgrade_domain115_floorfix_5m_mri_bed_smooth
+
+복구 원칙
+- 2층 바닥 삭제/재생성(UNIFORM FLOOR) 방식은 전부 폐기.
+- 위 기준본의 2층 바닥/엘리베이터 처리를 그대로 복구.
+- Nav2 / Local Costmap / Global Costmap / centerline / pose lock / elevator motion 수정 없음.
+
+이번 추가 변경
+1) config/isaac_config.json
+   - 침대 결합 시 wheel Max Force 60 -> 120
+   - 바퀴 구동력만 증가. 일반 주행 값은 그대로.
+2) scripts/isaac_amr_ros.py
+   - 침대 결합 상태의 Nav2 X 선속도만 2배
+   - lateral 및 angular(회전) 명령은 그대로
+
+유지
+- ROS_DOMAIN_ID=115
+- 2층 하차 5m
+- MRI 목표 x=8.5246, y=5.8035
+- 침대 caster 저마찰 기능

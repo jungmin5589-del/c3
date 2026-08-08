@@ -1,0 +1,67 @@
+{
+  "state": "REJECTED",
+  "reason": "PATIENT_MISMATCH",
+  "request_id": "amr1_20260808_133735_008292",
+  "verified": false,
+  "expected_name": "서수원",
+  "expected_birth_date": "1990-02-10",
+  "selected_name": "김서울",
+  "selected_birth_date": "2000-11-02",
+  "raw_name": "이",
+  "raw_birth_text": "'T2",
+  "normalized_raw_name": "이",
+  "normalized_raw_birth": "",
+  "raw_birth_digits": "2",
+  "score": 0.09707215794506999,
+  "support_frames": 0,
+  "frames_received": 2,
+  "plate_frames": 2,
+  "candidate_ranking": [
+    {
+      "name": "김서울",
+      "birth_date": "2000-11-02",
+      "score": 0.09707215794506999,
+      "support_frames": 0,
+      "name_support_frames": 0,
+      "birth_support_frames": 0,
+      "best_name_similarity": 0.0,
+      "best_birth_similarity": 0.2222222222222222
+    },
+    {
+      "name": "박인천",
+      "birth_date": "1960-07-23",
+      "score": 0.09707215794506999,
+      "support_frames": 0,
+      "name_support_frames": 0,
+      "birth_support_frames": 0,
+      "best_name_similarity": 0.0,
+      "best_birth_similarity": 0.2222222222222222
+    },
+    {
+      "name": "서수원",
+      "birth_date": "1990-02-10",
+      "score": 0.09707215794506999,
+      "support_frames": 0,
+      "name_support_frames": 0,
+      "birth_support_frames": 0,
+      "best_name_similarity": 0.0,
+      "best_birth_similarity": 0.2222222222222222
+    }
+  ],
+  "bbox": [
+    280,
+    20,
+    111,
+    55
+  ],
+  "bbox_x": 280,
+  "bbox_y": 20,
+  "bbox_width": 111,
+  "bbox_height": 55,
+  "bbox_center_x": 335.5,
+  "bbox_center_y": 47.5,
+  "image_width": 640,
+  "image_height": 360,
+  "output_dir": "/home/peter-msi/hospital/hospital_total_08081259/output/ocr/amr1_amr1_20260808_133735_008292_20260808_133737",
+  "matching_rule": "Only Korean name characters and birth-date digits are scored; labels are excluded by ROI."
+}

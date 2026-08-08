@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<robot name="hospital_amr1_rviz_square">
+  <material name="amr_blue">
+    <color rgba="0.12 0.55 0.95 1.0"/>
+  </material>
+
+  <!-- RViz 전용 단순 표시입니다. 실제 Isaac AMR 및 Nav2 footprint 크기는 바꾸지 않습니다. -->
+  <link name="base_link">
+    <visual>
+      <origin xyz="0 0 0.045" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.34 0.34 0.09"/>
+      </geometry>
+      <material name="amr_blue"/>
+    </visual>
+  </link>
+
+  <link name="base_scan"/>
+  <joint name="base_to_scan" type="fixed">
+    <parent link="base_link"/>
+    <child link="base_scan"/>
+    <origin xyz="0 0 0.32" rpy="0 0 0"/>
+  </joint>
+</robot>

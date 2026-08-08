@@ -1,0 +1,13 @@
+/**:
+  ros__parameters:
+    model_name: korean_PP-OCRv5_mobile_rec
+    device: cpu
+    cpu_threads: 4
+    recognition_variant_count: 1
+    default_frames_to_check: 1
+    verification_score_threshold: 0.20
+    minimum_plate_frames: 1
+    tracking_publish_hz: 15.0
+    plate_search_roi: [0.04, 0.04, 0.96, 0.96]
+    name_value_roi: [0.35, 0.06, 0.98, 0.49]
+    birth_value_roi: [0.35, 0.52, 0.98, 0.96]

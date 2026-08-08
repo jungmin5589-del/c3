@@ -1,0 +1,22 @@
+[NAV 반응 지연/중간 정지 최소 수정]
+
+기준: hospital_bed_amr_MAIN_PATIENT3_DUAL_SERVICE_domain115
+
+변경 범위만:
+1. 직선 segment 끝에서 yaw를 FollowPath가 기다리지 않게 yaw_goal_tolerance=3.14
+   - 최종/코너 yaw는 기존 centerline 강제회전이 담당
+2. ProgressChecker 정지 판정 45초 -> 5초
+3. corner_stop 0.55초 -> 0.15초
+4. centerline 코드의 중복 corner_stop 제거(한 번만 정지)
+5. 강제회전 0.90 -> 1.80 rad/s, min 0.35, kp 2.0, 안정확인 2회
+6. retry delay 0.8 -> 0.3초
+7. Isaac Nav2 command timeout 0.5 -> 1.0초 (짧은 렌더/ROS 지연으로 주행 명령이 끊기는 현상 완화)
+
+건드리지 않음:
+- OCR / 환자 좌표 / 환자 전진·후진 거리
+- MRI / K 검사완료 / 왕복 시나리오
+- 결합/해체 및 덜컹임 수정
+- 엘리베이터 서비스/5m/11m
+- 초기 pose / map / local costmap
+- corridor priority 구조
+- AMR2 namespace/TF/RViz 구조

@@ -1,0 +1,212 @@
+{
+  "project": {
+    "name": "Hospital Bed AMR KimSeoul Dual Nav2 + Automatic Elevator",
+    "version": "kimseoul-dual-nav2-elevator-domain115-v1.0",
+    "stage": "project4/project4_hospital_bed_amr_v1_15_ocr.usd"
+  },
+  "fleet": [
+    {
+      "name": "AMR1",
+      "namespace": "amr1",
+      "root_path": "/World/AMR1",
+      "ocr_key": "O",
+      "target_name": "김서울",
+      "target_birth_date": "2000-11-02",
+      "image_error_to_lateral_sign": -1.0,
+      "image_error_to_yaw_sign": -1.0
+    },
+    {
+      "name": "AMR2",
+      "namespace": "amr2",
+      "root_path": "/World/AMR2",
+      "ocr_key": "P",
+      "target_name": "김서울",
+      "target_birth_date": "2000-11-02",
+      "image_error_to_lateral_sign": -1.0,
+      "image_error_to_yaw_sign": -1.0
+    }
+  ],
+  "patient_candidates": [
+    {
+      "name": "김서울",
+      "birth_date": "2000-11-02"
+    }
+  ],
+  "camera": {
+    "resolution": [
+      640,
+      360
+    ],
+    "frequency_hz": 15,
+    "warmup_frames": 8,
+    "front_prim_suffix": "base_link/front_camera_link/Camera"
+  },
+  "ros2": {
+    "domain_id": 115,
+    "queue_size": 3,
+    "image_topic_suffix": "camera/front/color/image_raw",
+    "request_topic_suffix": "ocr/request",
+    "result_topic_suffix": "ocr/result",
+    "control_topic_suffix": "ocr/control",
+    "status_topic_suffix": "align/status"
+  },
+  "teleop": {
+    "linear_speed_mps": 0.75,
+    "lateral_speed_mps": 0.55,
+    "angular_speed_rad_s": 1.2,
+    "linear_accel_mps2": 1.0,
+    "lateral_accel_mps2": 3.0,
+    "angular_accel_rad_s2": 5.0,
+    "lift_command_speed_mps": 0.012,
+    "wheel_visual_velocity_limit_deg_s": 1800.0
+  },
+  "amr_geometry": {
+    "wheel_radius": 0.075,
+    "wheel_x": 0.3,
+    "wheel_y": 0.2825,
+    "lift_lower_limit_m": 0.0,
+    "lift_upper_limit_m": 0.035
+  },
+  "auto_approach": {
+    "enabled": true,
+    "frames_to_check": 4,
+    "stable_tracking_messages": 2,
+    "tracking_timeout_sec": 6.0,
+    "lateral_kp": 1.6,
+    "max_lateral_speed_mps": 0.1,
+    "forward_distance_m": 3.328,
+    "forward_speed_mps": 0.32,
+    "x_tolerance_px": 12.0,
+    "yaw_align_threshold_px": 70.0,
+    "yaw_kp": 0.9,
+    "max_yaw_speed_rad_s": 0.18,
+    "min_yaw_speed_rad_s": 0.05
+  },
+  "nav2": {
+    "enabled": true,
+    "command_timeout_sec": 0.5,
+    "odom_publish_hz": 30.0,
+    "scan_publish_hz": 10.0,
+    "clock_publish_hz": 60.0,
+    "max_linear_speed_mps": 0.9,
+    "max_lateral_speed_mps": 0.55,
+    "max_angular_speed_rad_s": 1.2,
+    "lidar": {
+      "prim_name": "nav_lidar",
+      "translation": [
+        0.0,
+        0.0,
+        0.32
+      ],
+      "min_range_m": 0.15,
+      "max_range_m": 12.0,
+      "horizontal_resolution_deg": 0.5,
+      "vertical_fov_deg": 1.0,
+      "vertical_resolution_deg": 1.0,
+      "rotation_rate_hz": 0.0,
+      "yaw_offset_deg": 0.0,
+      "draw_points": false,
+      "draw_lines": false
+    },
+    "robots": [
+      {
+        "amr_name": "AMR1",
+        "cmd_vel_topic": "/cmd_vel",
+        "odom_topic": "/odom",
+        "scan_topic": "/scan",
+        "clock_topic": "/clock",
+        "odom_frame": "odom",
+        "base_frame": "base_link",
+        "scan_frame": "base_scan",
+        "publish_clock": true,
+        "tf_topic": "/tf",
+        "world_pose_topic": "/amr1/world_pose"
+      },
+      {
+        "amr_name": "AMR2",
+        "cmd_vel_topic": "/amr2/cmd_vel",
+        "odom_topic": "/amr2/odom",
+        "scan_topic": "/amr2/scan",
+        "clock_topic": "/clock",
+        "odom_frame": "amr2/odom",
+        "base_frame": "amr2/base_link",
+        "scan_frame": "amr2/base_scan",
+        "publish_clock": false,
+        "tf_topic": "/amr2/tf",
+        "world_pose_topic": "/amr2/world_pose"
+      }
+    ]
+  },
+  "magnetic_dock": {
+    "enabled": true,
+    "auto_enabled_on_start": true,
+    "capture_distance_m": 1.2,
+    "candidate_bed_paths": [
+      "/World/Bed_KimSeoul",
+      "/World/ParkIncheon",
+      "/World/SeoSuwon",
+      "/World/HospitalBed1",
+      "/World/HospitalBed2",
+      "/World/HospitalBed3",
+      "/World/HospitalBed",
+      "/World/Bed1",
+      "/World/Bed2",
+      "/World/Bed3"
+    ],
+    "candidate_name_keywords": [
+      "bed",
+      "kimseoul",
+      "parkincheon",
+      "seosuwon"
+    ],
+    "break_force_n": 1000000000.0,
+    "break_torque_nm": 1000000000.0,
+    "auto_raise_lift_after_lock": true,
+    "auto_lower_lift_after_release": true,
+    "lift_settle_sec": 3.2
+  },
+  "amr2_clone": {
+    "enabled": true,
+    "source_path": "/World/AMR1",
+    "target_path": "/World/AMR2"
+  },
+  "loaded_drive_profile": {
+    "enabled": true,
+    "wheel_max_force_nm": 60.0
+  },
+  "elevator": {
+    "enabled": true,
+    "trigger_key": "ROS_ONLY",
+    "implementation": "rokey-pre-lift-fixed-joint-plus-physx-kinematic-floor-support-handoff",
+    "operation_mode": "arrival-topic-automatic-up-sequence",
+    "lift_prim_names": [
+      "Side_Lift_Anim_29",
+      "Side_Lift_Anim_28",
+      "Dummy002"
+    ],
+    "floor_prim_name": "Side_Lift_Anim_29",
+    "lift_distance_m": 11.325,
+    "door_time_s": 2.0,
+    "lift_time_s": 9.0,
+    "floor_proxy_thickness_m": 0.1,
+    "floor_proxy_top_bias_m": -0.001,
+    "floor_proxy_inset_m": 0.03,
+    "capture_margin_m": 0.35,
+    "floor_target_tolerance_m": 0.025,
+    "arrival_floor_sync_timeout_s": 3.0,
+    "arrival_joint_hold_s": 1.5,
+    "post_release_settle_s": 1.2,
+    "boarding_settle_s": 2.0,
+    "entry_distance_m": 3.0,
+    "entry_speed_mps": 0.25,
+    "exit_reverse_distance_m": 10.0,
+    "exit_reverse_speed_mps": 0.25,
+    "rotation_angle_rad": 6.283185307179586,
+    "rotation_speed_rad_s": 0.55,
+    "phase_timeout_s": 90.0,
+    "arrival_command_topic": "/elevator/amr_arrived",
+    "status_topic": "/elevator/status",
+    "map_switch_ack_topic": "/elevator/map_switch_ack",
+    "final_arrival_topic": "/amr1/elevator/arrived"
+  }
+}

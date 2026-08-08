@@ -1,0 +1,17 @@
+이 버전은 hospital_bed_amr_project_nav2_v1(1).zip을 기준으로 만들었습니다.
+
+변경한 항목은 두 가지뿐입니다.
+1. ROS_DOMAIN_ID를 모든 실행 설정에서 115로 고정
+2. AMR1 초기 Pose 자동 적용
+   x: -45.0467
+   y: 31.8558
+   yaw: -1.566514 rad
+
+변경하지 않은 핵심 항목:
+- scripts/nav2_bridge.py
+- centerline_navigator.py
+- Nav2 컨트롤러/BT/코스트맵/주행 설정
+
+Nav2 실행 후 RViz에서 2D Pose Estimate를 찍지 않습니다.
+자동 초기 위치 잠금 완료 로그를 확인한 뒤 2D Goal Pose만 지정합니다.
+소스가 변경되었으므로 처음 한 번 ./02_build_ros_ws.sh를 반드시 실행하십시오.

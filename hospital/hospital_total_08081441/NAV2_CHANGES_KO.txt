@@ -1,0 +1,33 @@
+NAV2 V1 변경 내용
+
+1. 기존 scripts/isaac_amr_ros.py
+- AMR1 /cmd_vel 수신 추가
+- 키보드/OCR 명령과 Nav2 명령 우선순위 통합
+- Nav2 bridge 실행 연결
+
+2. 신규 scripts/nav2_bridge.py
+- /cmd_vel SUB
+- /odom PUB
+- /tf PUB (odom -> base_link)
+- /scan PUB
+- /clock PUB
+- /World/AMR1/base_link/nav_lidar PhysX LiDAR 런타임 생성
+
+3. 신규 ROS2 package: ros2_ws/src/hospital_nav2
+- Nav2 bringup launch
+- AMCL, DWB holonomic controller, costmap 설정
+- RViz robot model용 URDF
+- Occupancy Map 저장 폴더
+
+4. 실행 스크립트
+- 07_install_nav2.sh
+- 08_open_occupancy_map.sh
+- 09_run_nav2_amr1.sh
+- 10_check_nav2_topics.sh
+- 11_test_cmd_vel_amr1.sh
+
+5. 검증 범위
+- Python 구문 검사 완료
+- Shell 구문 검사 완료
+- JSON/YAML/XML 파싱 검사 완료
+- 실제 Isaac Sim 5.1 런타임과 Nav2 주행은 제작 환경에서 실행할 수 없어 사용자 노트북에서 첫 실행 확인 필요

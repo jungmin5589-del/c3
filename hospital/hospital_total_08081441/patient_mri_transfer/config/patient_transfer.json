@@ -1,0 +1,545 @@
+{
+  "patient_registry": {
+    "서수원": {
+      "birth_date": "1990-02-10",
+      "bed_front": {
+        "x": -43.4285,
+        "y": 15.1918,
+        "yaw": 3.141593
+      },
+      "bed_under": {
+        "x": -47.0088,
+        "y": 15.1918,
+        "yaw": 3.141593
+      },
+      "source_bed_prim": "/World/SeoSuwon"
+    },
+    "박인천": {
+      "birth_date": "1960-07-23",
+      "bed_front": {
+        "x": -43.6,
+        "y": 11.0,
+        "yaw": 3.141593
+      },
+      "bed_under": {
+        "x": -47.046,
+        "y": 11.3356,
+        "yaw": 3.141593
+      },
+      "source_bed_prim": "/World/ParkIncheon"
+    },
+    "김서울": {
+      "birth_date": "2000-11-02",
+      "bed_front": {
+        "x": -39.834,
+        "y": 12.28,
+        "yaw": -1.615
+      },
+      "bed_under": {
+        "x": -39.6193,
+        "y": 8.1059,
+        "yaw": -1.570796
+      },
+      "source_bed_prim": "/World/Bed_KimSeoul"
+    }
+  },
+  "shared_mri": {
+    "mri_bed_prim": "/World/HospitalRuntimeTargets/MRIPatientTarget",
+    "auto_discovery_keywords": [
+      "mri",
+      "scanner",
+      "gantry",
+      "magnetom"
+    ],
+    "selection_hotkey": "K",
+    "persist_selected_prim": true,
+    "single_occupancy": true,
+    "assignment_note": "Runtime MRI target at measured XYZ. Patient mount rotations use world-Z yaw only. Enter 2.05 m; re-arm outside 3.75 m.",
+    "prefer_second_floor": true,
+    "prefer_highest_world_z": true,
+    "auto_discovery_require_table_like": false,
+    "auto_discovery_reject_tokens": [
+      "material",
+      "mesh",
+      "geom",
+      "collision",
+      "wheel",
+      "door",
+      "wall",
+      "ceiling"
+    ],
+    "measured_tabletop_prim": "/World/HospitalMap/scene/Meshes/Sketchfab_model/Collada_visual_scene_group/TableTop",
+    "measured_world_xyz_m": [
+      7.41316,
+      5.80355,
+      12.2733
+    ],
+    "orientation_mode": "world_z_yaw_only"
+  },
+  "patients": [
+    {
+      "id": "patient1",
+      "name": "김서울",
+      "birth_date": "2000-11-02",
+      "source_bed_prim": "/World/Bed_KimSeoul",
+      "source_bed_pose": {
+        "x": -39.6193,
+        "y": 8.1059,
+        "yaw": -1.570796
+      },
+      "source_bed_aliases": [
+        "bed_kimseoul",
+        "kimseoul",
+        "kim_seoul",
+        "김서울"
+      ],
+      "mri_bed_prim": "/World/HospitalRuntimeTargets/MRIPatientTarget",
+      "patient_root_prim": "/World/PatientTransfers/Patient1",
+      "patient_reference_prim": "/World/PatientTransfers/Patient1/Visual",
+      "asset": {
+        "source_asset": "assets/patient_shared/source/patient_laying_normalized.glb",
+        "converted_usd": "assets/patient_shared/converted/patient_laying_normalized.usd",
+        "normalized_laying_asset": true,
+        "physical_length_m": 1.864,
+        "physical_width_m": 0.642,
+        "physical_height_m": 0.27,
+        "head_direction_local": "-X after visual yaw 180 deg"
+      },
+      "source_mount": {
+        "translate_m": [
+          0.0,
+          0.0,
+          0.78
+        ],
+        "rotate_xyz_deg": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      "mri_mount": {
+        "translate_m": [
+          0.0,
+          0.0,
+          0.05
+        ],
+        "rotate_xyz_deg": [
+          0.0,
+          0.0,
+          90.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "note": "Horizontal turn only: X=0, Y=0, Z=yaw. The MRI target ignores TableTop pitch/roll.",
+        "rotation_space": "world_z_yaw_via_unrotated_mri_target"
+      },
+      "patient_visual": {
+        "translate_m": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotate_xyz_deg": [
+          0.0,
+          0.0,
+          180.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      "transfer": {
+        "mode": "slide",
+        "duration_sec": 2.5,
+        "arc_height_m": 0.08
+      },
+      "auto_cycle": {
+        "enabled": true,
+        "enter_radius_m": 2.05,
+        "exit_radius_m": 3.75,
+        "hold_seconds": 1.0,
+        "minimum_play_time_sec": 3.0,
+        "only_when_timeline_playing": true,
+        "trigger_initial_inside": true,
+        "retry_busy_sec": 0.5
+      },
+      "ros": {
+        "command_topic": "/patient_transfer/patient1/command",
+        "status_topic": "/patient_transfer/patient1/status"
+      },
+      "pose_note": "Normalized GLB rotated 180 deg on bed; head toward bed head side (local -X)."
+    },
+    {
+      "id": "patient2",
+      "name": "박인천",
+      "birth_date": "1960-07-23",
+      "source_bed_prim": "/World/ParkIncheon",
+      "source_bed_pose": {
+        "x": -47.046,
+        "y": 11.3356,
+        "yaw": 3.141593
+      },
+      "source_bed_aliases": [
+        "parkincheon",
+        "park_incheon",
+        "박인천"
+      ],
+      "mri_bed_prim": "/World/HospitalRuntimeTargets/MRIPatientTarget",
+      "patient_root_prim": "/World/PatientTransfers/Patient2",
+      "patient_reference_prim": "/World/PatientTransfers/Patient2/Visual",
+      "asset": {
+        "source_asset": "assets/patient_holding_stomach/source/patient_hurt_holding_his_stomach.glb",
+        "converted_usd": "assets/patient_holding_stomach/converted/patient_hurt_holding_his_stomach_park_laying_v2.usd",
+        "normalized_laying_asset": false,
+        "visual_model": "patient_hurt_holding_his_stomach",
+        "physical_length_m": 2.00127,
+        "physical_width_m": 0.681216,
+        "physical_height_m": 0.554939,
+        "source_coordinate_note": "Source GLB may compose upright after conversion. Runtime force-laying search selects the flattest orientation and then bbox-fits it to the mattress.",
+        "standing_source_asset": true
+      },
+      "source_mount": {
+        "translate_m": [
+          0.0,
+          0.0,
+          0.78
+        ],
+        "rotate_xyz_deg": [
+          0.0,
+          0.0,
+          180.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      "mri_mount": {
+        "translate_m": [
+          0.0,
+          0.0,
+          0.05
+        ],
+        "rotate_xyz_deg": [
+          0.0,
+          0.0,
+          270.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "note": "Horizontal turn only: X=0, Y=0, Z=yaw. The MRI target ignores TableTop pitch/roll.",
+        "rotation_space": "world_z_yaw_via_unrotated_mri_target"
+      },
+      "patient_visual": {
+        "translate_m": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotate_xyz_deg": [
+          -90.0,
+          0.0,
+          -90.0
+        ],
+        "scale": [
+          0.85,
+          0.85,
+          0.85
+        ],
+        "axis_alignment": {
+          "source_head_axis": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "source_front_axis": [
+            0.0,
+            -1.0,
+            0.0
+          ],
+          "target_head_axis": [
+            -1.0,
+            0.0,
+            0.0
+          ],
+          "target_front_axis": [
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        "auto_fit_to_mount": {
+          "enabled": true,
+          "center_x": true,
+          "center_y": true,
+          "center_offset_m": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rest_clearance_m": 0.025,
+          "compose_frames": 6,
+          "max_correction_m": 3.0,
+          "note": "Holding-stomach GLB is centered on mattress and its lowest point is raised to mount plane."
+        },
+        "force_laying_pose": {
+          "enabled": true,
+          "patient_only": true,
+          "compose_frames": 3,
+          "minimum_flatness_ratio": 1.35,
+          "candidate_rotations_xyz_deg": [
+            [
+              -90.0,
+              0.0,
+              -90.0
+            ],
+            [
+              90.0,
+              0.0,
+              90.0
+            ],
+            [
+              90.0,
+              0.0,
+              -90.0
+            ],
+            [
+              -90.0,
+              0.0,
+              90.0
+            ],
+            [
+              0.0,
+              90.0,
+              0.0
+            ],
+            [
+              0.0,
+              -90.0,
+              0.0
+            ],
+            [
+              90.0,
+              0.0,
+              0.0
+            ],
+            [
+              -90.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              90.0
+            ],
+            [
+              0.0,
+              0.0,
+              -90.0
+            ]
+          ],
+          "note": "Selects the flattest laying pose; patient root mount is then rotated 180 degrees around bed-local Z so Park Incheon head/feet direction is reversed.",
+          "post_mount_yaw_deg": 180.0
+        },
+        "scale_note": "Reduced uniformly to 85% so feet remain inside the transport bed while force-laying and bbox centering remain active."
+      },
+      "transfer": {
+        "mode": "slide",
+        "duration_sec": 2.5,
+        "arc_height_m": 0.08
+      },
+      "auto_cycle": {
+        "enabled": true,
+        "enter_radius_m": 2.05,
+        "exit_radius_m": 3.75,
+        "hold_seconds": 1.0,
+        "minimum_play_time_sec": 3.0,
+        "only_when_timeline_playing": true,
+        "trigger_initial_inside": true,
+        "retry_busy_sec": 0.5
+      },
+      "ros": {
+        "command_topic": "/patient_transfer/patient2/command",
+        "status_topic": "/patient_transfer/patient2/status"
+      },
+      "pose_note": "박인천 환자는 강제 눕힘을 유지하고 침대/MRI 상판 기준 Z축 180도로 뒤집어 머리가 침대 머리쪽을 향한다."
+    },
+    {
+      "id": "patient3",
+      "name": "서수원",
+      "birth_date": "1990-02-10",
+      "source_bed_prim": "/World/SeoSuwon",
+      "source_bed_pose": {
+        "x": -47.0088,
+        "y": 15.1918,
+        "yaw": 3.141593
+      },
+      "source_bed_aliases": [
+        "seosuwon",
+        "seo_suwon",
+        "서수원"
+      ],
+      "mri_bed_prim": "/World/HospitalRuntimeTargets/MRIPatientTarget",
+      "patient_root_prim": "/World/PatientTransfers/Patient3",
+      "patient_reference_prim": "/World/PatientTransfers/Patient3/Visual",
+      "asset": {
+        "source_asset": "assets/patient_ronaldo/source/Cristiano Ronaldo.fbx",
+        "converted_usd": "assets/patient_ronaldo/converted/cristiano_ronaldo_laying.usd",
+        "standing_source_asset": true,
+        "source_coordinate_note": "FBX GlobalSettings: Y-up, +Z front, centimeter units. Converter maps to Isaac Z-up.",
+        "visual_model": "Cristiano Ronaldo",
+        "head_direction_local": "bed local -X after axis alignment"
+      },
+      "source_mount": {
+        "translate_m": [
+          0.0,
+          0.0,
+          0.78
+        ],
+        "rotate_xyz_deg": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      "mri_mount": {
+        "translate_m": [
+          0.0,
+          0.0,
+          0.05
+        ],
+        "rotate_xyz_deg": [
+          0.0,
+          0.0,
+          90.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "note": "Horizontal turn only: X=0, Y=0, Z=yaw. The MRI target ignores TableTop pitch/roll.",
+        "rotation_space": "world_z_yaw_via_unrotated_mri_target"
+      },
+      "patient_visual": {
+        "translate_m": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rotate_xyz_deg": [
+          -90.0,
+          0.0,
+          -90.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "axis_alignment": {
+          "source_head_axis": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "source_front_axis": [
+            0.0,
+            -1.0,
+            0.0
+          ],
+          "target_head_axis": [
+            -1.0,
+            0.0,
+            0.0
+          ],
+          "target_front_axis": [
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        "auto_fit_to_mount": {
+          "enabled": true,
+          "center_x": true,
+          "center_y": true,
+          "center_offset_m": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rest_clearance_m": 0.025,
+          "compose_frames": 6,
+          "max_correction_m": 3.0,
+          "note": "Uses the composed world bounding box after lying-axis alignment. Centers the model on the bed and raises its lowest point to the mattress mount plane."
+        },
+        "asset_root_override": {
+          "enabled": true,
+          "path_suffix": "AvatarRoot",
+          "translate_stage_units": [
+            -0.018,
+            1.3,
+            -0.8
+          ],
+          "rotate_xyz_deg": [
+            90.3,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            -1.266,
+            1.0,
+            1.0
+          ],
+          "compose_frames": 4,
+          "note": "Exact AvatarRoot TRS captured from the user-adjusted Isaac Sim pose on 2026-08-05."
+        }
+      },
+      "transfer": {
+        "mode": "slide",
+        "duration_sec": 2.5,
+        "arc_height_m": 0.08
+      },
+      "auto_cycle": {
+        "enabled": true,
+        "enter_radius_m": 2.05,
+        "exit_radius_m": 3.75,
+        "hold_seconds": 1.0,
+        "minimum_play_time_sec": 3.0,
+        "only_when_timeline_playing": true,
+        "trigger_initial_inside": true,
+        "retry_busy_sec": 0.5
+      },
+      "ros": {
+        "command_topic": "/patient_transfer/patient3/command",
+        "status_topic": "/patient_transfer/patient3/status"
+      },
+      "pose_note": "Ronaldo uses fixed AvatarRoot TRS from user-adjusted pose, then outer Visual bbox-fit keeps him centered on mattress."
+    }
+  ],
+  "ros": {
+    "enabled": true,
+    "global_command_topic": "/patient_transfer/command",
+    "global_status_topic": "/patient_transfer/status"
+  }
+}

@@ -1,0 +1,16 @@
+김서울 마그네틱 + 자동 리프트 + AMR 단독 footprint 수정
+
+1. 참고본 hospital_bed_amr_project_nav2_v1(3).zip처럼 침대 결합 후 리프트를 올립니다.
+2. C/LOCK 성공 즉시 lift_joint 목표를 0.035m로 설정합니다.
+3. 3.2초 동안 AMR 명령을 정지해 캐스터가 바닥에서 떨어질 시간을 확보합니다.
+4. Nav2 centerline_navigator에서 /amr1/bed_attached 구독을 완전히 제거했습니다.
+5. Nav2 local/global costmap에 AMR 정사각형 footprint 0.74m x 0.74m를 명시적으로 적용합니다. 침대 확장 footprint는 사용하지 않습니다.
+6. RViz published_footprint는 AMR 단독 footprint를 계속 표시합니다.
+7. 마그네틱, OCR, 3.328m 전진/후진, 엘리베이터 목표는 유지합니다.
+
+
+[추가 수정]
+- 각 직선 구간 전에 centerline_navigator가 cmd_vel로 먼저 회전합니다.
+- 이 회전은 Nav2 SimpleProgressChecker 밖에서 실행되므로 위치 이동량/시간 제약을 받지 않습니다.
+- FollowPath가 실패 또는 취소되면 현재 위치에서 같은 최종 목적지까지 중앙 경로를 다시 계산합니다.
+- max_follow_path_retries=0은 무제한 자동 재시도를 뜻합니다.

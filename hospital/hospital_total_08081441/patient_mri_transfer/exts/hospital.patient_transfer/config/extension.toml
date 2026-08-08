@@ -1,0 +1,15 @@
+[package]
+version = "3.0.0"
+title = "Hospital Dual Patient MRI Transfer"
+description = "Places three non-physical patients on 김서울/박인천 transport beds and alternates each patient between the moving bed and one selected MRI table with hysteresis and single-occupancy protection."
+category = "Simulation"
+authors = ["Hospital Bed AMR Project"]
+readme = "README_KO.md"
+
+[dependencies]
+"omni.usd" = {}
+"omni.timeline" = {}
+"omni.kit.asset_converter" = {}
+
+[[python.module]]
+name = "hospital.patient.transfer"

@@ -1,0 +1,21 @@
+빠른 시연 실행 구성 (ROS_DOMAIN_ID=115)
+
+노트북 A / 터미널 1: Isaac Sim
+  ./03_run_isaac.sh
+
+노트북 A / 터미널 2: Nav2 + RViz
+  ./09_run_nav2_amr1.sh
+
+노트북 B / 터미널 3: OCR + 김서울 Python 매니저 통합 launch
+  ./04_run_ocr_mission.sh
+
+노트북 B / 터미널 4: 상태 확인
+  source /opt/ros/humble/setup.bash
+  export ROS_DOMAIN_ID=115
+  ros2 topic echo /amr1/align/status
+
+최초 1회 또는 수정 후 빌드
+  ./02_build_ros_ws.sh
+
+기존 프로세스 정리
+  ./00_stop_all.sh

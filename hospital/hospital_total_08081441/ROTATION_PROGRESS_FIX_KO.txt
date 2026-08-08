@@ -1,0 +1,7 @@
+김서울 결합 후 회전 정지 수정
+
+1. 침대 RigidBody에 직접 속도/각속도를 강제로 쓰던 보조를 완전히 제거했습니다.
+2. Wheel Drive Max Force 60 N·m는 결합 후에만 유지합니다.
+3. Nav2 max_vel_theta, behavior max_rotational_vel, velocity_smoother angular max를 0.55 rad/s로 통일했습니다.
+4. SimpleProgressChecker movement_time_allowance를 15초에서 45초로 늘렸습니다.
+5. AMR robot_radius 0.52m, local inflation_radius 0.30m, OCR/후진/엘리베이터 좌표는 변경하지 않았습니다.

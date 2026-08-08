@@ -1,0 +1,8 @@
+결합 후 구동 성능 보강
+
+- 결합 전: 기존 구동 설정 그대로
+- 결합 성공 후: 4개 Wheel Drive Max Force를 각각 60 N·m로 설정
+- 결합 중: 고정 결합된 침대 RigidBody에 AMR과 일치하는 선속도/각속도 보조 적용
+- 회전 시 침대 중심의 오프셋을 고려해 v_bed = v_amr + omega x r로 계산
+- X 해제 또는 종료 시: 원래 Wheel Drive Max Force로 복원
+- Nav2, OCR, 코스트맵, 풋프린트, 경로 좌표는 변경하지 않음

@@ -1,0 +1,142 @@
+============================================================
+병원 침대 AMR 메인 시나리오 사용법 (ROS_DOMAIN_ID=115)
+============================================================
+
+[이 버전의 기준]
+- 업로드된 HEIGHT_LOCK 버전을 메인으로 유지
+- OCR 빠른 설정 유지
+- 2층 AMR 높이 잠금 유지
+- 기존 중앙 직각경로 / 강제회전 / 초기 Pose / Nav2 자동기동 유지
+- AMR1 / AMR2 주행 제한과 가감속을 기존의 정확히 2배로 조정
+- 결합 후 추가 x2 곱셈은 제거: 결합 전/후 모두 같은 2배속 기준
+- 결합 시 AMR/침대 직선 선속도 동기화는 AMR1/AMR2 동일 적용
+- 엘리베이터는 ROS Trigger 서비스 요청/응답 + 기존 상태 토픽으로 진행
+- 엘리베이터는 한 번에 한 AMR만 사용 가능(먼저 승인된 요청이 완료할 때까지 점유)
+
+[환자 선택]
+1 : 김서울
+2 : 박인천
+3 : 서수원
+
+[환자별 OCR Pose / 전진 / 결합 후 후진]
+1 김서울
+  OCR Pose : X=-43.6377, Y=11.4166, YAW=-1.565538
+  전진     : 3.3280 m
+  후진     : 1.6640 m (전진의 1/2)
+
+2 박인천
+  OCR Pose : X=-43.4339, Y=11.2432, YAW=3.111352
+  전진     : 3.5221 m
+  후진     : 1.76105 m (전진의 1/2)
+
+3 서수원
+  OCR Pose : X=-43.8482, Y=15.1898, YAW=3.132669
+  전진     : 3.1554 m
+  후진     : 1.5777 m (전진의 1/2)
+
+[전체 AMR1 자동 시나리오]
+초기 Pose
+ -> 선택 환자 OCR Pose
+ -> OCR 판독 + X 중심정렬
+ -> 환자별 거리 전진
+ -> 침대 결합 + 리프트
+ -> 전진거리의 1/2만 직선 후진
+ -> 1F 엘리베이터 좌표
+ -> /amr1/elevator/request_up SERVICE
+ -> 2F 도착 + 5m 하차
+ -> MRI X=7.22, Y=6.37464
+ -> 마지막 직선 방향 그대로 3초 정지
+ -> 같은 방향으로 11m 직선 후진
+ -> 검사완료 대기
+ -> OCR/미션 터미널에서 K 키 또는 /inspection/complete SERVICE
+ -> 2F 엘리베이터 X=25.94921, Y=21.31296
+ -> /amr1/elevator/request_down SERVICE
+ -> 10m 후진 탑승 -> 1F 하강 -> 5m 전진 하차
+ -> 병실 복귀용 저장 위치
+ -> 환자별 절반거리 전진하여 원래 결합 위치 복원
+ -> 침대 결합해체
+ -> 초기 Pose 도킹스테이션 복귀
+
+[검사완료 SERVICE - K 대신 외부 장비에서 호출 가능]
+ros2 service call /inspection/complete std_srvs/srv/Trigger "{}"
+
+[엘리베이터 SERVICE]
+AMR1 상승:
+  /amr1/elevator/request_up   std_srvs/srv/Trigger
+AMR1 하강:
+  /amr1/elevator/request_down std_srvs/srv/Trigger
+AMR2 상승:
+  /amr2/elevator/request_up   std_srvs/srv/Trigger
+AMR2 하강:
+  /amr2/elevator/request_down std_srvs/srv/Trigger
+
+서비스 응답 success=true는 '요청 승인/엘리베이터 점유권 확보'를 뜻한다.
+실제 단계 완료 여부는 /elevator/status를 통해 계속 전달되고,
+미션 매니저가 MAP_SWITCH_REQUIRED 응답까지 처리한 뒤 COMPLETE를 기다린다.
+
+[듀얼 RViz]
+./09_run_nav2_dual.sh 사용 시 RViz는 한 창만 연다.
+- AMR1: 기존 표시 그대로
+- AMR2: /amr2/centerline_path + /amr2/rviz_icon만 추가
+- AMR2 초기 Pose: 기존 fixed (-47.2788, 26.5713, 0.0) 유지
+- AMR2 RViz icon 노드는 표시 전용이며 cmd_vel/TF/initialpose/Nav2 action을 발행하지 않는다.
+
+[복도/엘리베이터 충돌 방지]
+- 복도: 기존 corridor_priority_manager 그대로 사용
+- 엘리베이터: 별도 서비스 mutex 추가
+  먼저 승인된 AMR이 승강 전체 시퀀스를 완료할 때까지 다른 AMR 요청은 BUSY 응답
+- 경로 재탐색/FollowPath 주기는 기존 구조 유지. 불필요한 action 반복 변경 없음.
+
+============================================================
+최초 1회 빌드
+============================================================
+cd /home/rokey/hospital_bed_amr_MAIN_PATIENT3_DUAL_SERVICE_domain115
+chmod +x *.sh scripts/*.sh
+./00_stop_all.sh
+./02_build_ros_ws.sh
+
+============================================================
+AMR1 단독 최종 시나리오
+============================================================
+[터미널 1 - Isaac Sim]
+cd /home/rokey/hospital_bed_amr_MAIN_PATIENT3_DUAL_SERVICE_domain115
+./03_run_isaac.sh
+# Isaac Sim이 열리면 PLAY
+
+[터미널 2 - AMR1 Nav2 + RViz]
+cd /home/rokey/hospital_bed_amr_MAIN_PATIENT3_DUAL_SERVICE_domain115
+./09_run_nav2_amr1.sh
+
+[터미널 3 - OCR + 환자선택 + 미션]
+cd /home/rokey/hospital_bed_amr_MAIN_PATIENT3_DUAL_SERVICE_domain115
+./04_run_ocr_mission.sh
+# 1 김서울 / 2 박인천 / 3 서수원 선택
+# MRI에서 11m 후진한 뒤 같은 터미널에서 K 키 -> 복귀 시작
+
+[터미널 4 - 토픽 확인]
+cd /home/rokey/hospital_bed_amr_MAIN_PATIENT3_DUAL_SERVICE_domain115
+./10_check_nav2_topics.sh
+
+============================================================
+AMR1 + AMR2 듀얼 Nav2
+============================================================
+[터미널 1 - Isaac Sim]
+cd /home/rokey/hospital_bed_amr_MAIN_PATIENT3_DUAL_SERVICE_domain115
+./03_run_isaac.sh
+# PLAY
+
+[터미널 2 - AMR1+AMR2 Nav2 + 단일 RViz]
+cd /home/rokey/hospital_bed_amr_MAIN_PATIENT3_DUAL_SERVICE_domain115
+./09_run_nav2_dual.sh
+
+[터미널 3 - AMR1 OCR/미션]
+cd /home/rokey/hospital_bed_amr_MAIN_PATIENT3_DUAL_SERVICE_domain115
+./04_run_ocr_mission.sh
+
+[터미널 4 - 기본 토픽 확인]
+cd /home/rokey/hospital_bed_amr_MAIN_PATIENT3_DUAL_SERVICE_domain115
+./10_check_nav2_topics.sh
+
+AMR2 목표 토픽은 /amr2/center_goal 이고,
+AMR2 경로는 /amr2/centerline_path 로 RViz에 표시된다.
+============================================================

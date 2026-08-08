@@ -1,0 +1,57 @@
+============================================================
+프로젝트 4 — AMR1 OCR 검증 → 이름표 X 중앙 정렬 → 1.0m 전진
+============================================================
+
+[최초 1회]
+cd /home/rokey/hospital_bed_amr_project
+chmod +x *.sh scripts/*.sh
+./check_project.sh
+
+# 기존 가상환경에 PaddleOCR 3.1.1이 이미 있으면 설치 생략 가능
+/home/rokey/.venvs/hospital_ocr_ros310/bin/python -c "import paddleocr; print(paddleocr.__version__)"
+
+# 가상환경이 없거나 import가 실패할 때만
+./01_install_ocr_ros.sh
+
+# 소스가 바뀌었으므로 반드시 다시 빌드
+./02_build_ros_ws.sh
+
+[터미널 1 — Isaac Sim]
+cd /home/rokey/hospital_bed_amr_project
+./03_run_isaac.sh
+
+[터미널 2 — AMR1 OCR launch]
+cd /home/rokey/hospital_bed_amr_project
+./04_run_ocr_amr1.sh
+
+[직접 테스트]
+1. 터미널 2에서 "[amr1] OCR model ready" 확인
+2. Isaac Sim Viewport 클릭
+3. W/S/A/D/Q/E로 김서울 이름표가 전면 카메라에 보이게 이동
+4. X 자동정렬 확인을 위해 이름표를 화면 중앙에서 약간 왼쪽 또는 오른쪽에 둠
+5. 키에서 손을 떼고 O를 딱 한 번 누름
+6. OCR 성공 후 AMR1이 Q/E와 같은 횡이동으로 bbox 중심 X를 화면 중심 X에 맞춤
+7. ±12px 안에 3개의 새 TRACKING 메시지가 연속으로 들어오면 1.0m 전진
+8. 1.0m 도달 후 정지
+
+[터미널 1 정상 로그 순서]
+AUTO=WAITING_OCR
+VERIFIED: 김서울 2000-11-02
+AUTO=ALIGNING_X
+ALIGN_X Q-equivalent 또는 E-equivalent
+ALIGN_X inside tolerance
+AUTO=FORWARD_1M
+AUTO=COMPLETE
+
+[터미널 2 정상 로그 순서]
+request=... expected=김서울 2000-11-02; collecting 10 frames
+10 frames captured; OCR worker started
+VERIFIED 김서울 2000-11-02 ...; tracking started
+tracking stopped by Isaac command
+
+[중요]
+- 화면 폭 640px 기준 중심 X는 320px
+- 허용 오차는 ±12px
+- Y 좌표는 전혀 사용하지 않음
+- 가장 가까운 침대 계산 없음
+- 2초마다 나오던 AMR 속도/AUTO 반복 로그 제거됨

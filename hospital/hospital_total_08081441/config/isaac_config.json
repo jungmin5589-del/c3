@@ -1,0 +1,511 @@
+{
+  "project": {
+    "name": "Hospital Bed AMR KimSeoul Dual Nav2 + Automatic Elevator",
+    "version": "kimseoul-dual-nav2-elevator-domain115-v1.0",
+    "stage": "project4/project4_hospital_bed_amr_v1_15_ocr.usd"
+  },
+  "fleet": [
+    {
+      "name": "AMR1",
+      "namespace": "amr1",
+      "root_path": "/World/AMR1",
+      "ocr_key": "O",
+      "target_name": "김서울",
+      "target_birth_date": "2000-11-02",
+      "image_error_to_lateral_sign": -1.0,
+      "image_error_to_yaw_sign": -1.0
+    },
+    {
+      "name": "AMR2",
+      "namespace": "amr2",
+      "root_path": "/World/AMR2",
+      "ocr_key": "P",
+      "target_name": "김서울",
+      "target_birth_date": "2000-11-02",
+      "image_error_to_lateral_sign": -1.0,
+      "image_error_to_yaw_sign": -1.0
+    }
+  ],
+  "patient_candidates": [
+    {
+      "name": "김서울",
+      "birth_date": "2000-11-02"
+    },
+    {
+      "name": "박인천",
+      "birth_date": "1960-07-23"
+    },
+    {
+      "name": "서수원",
+      "birth_date": "1990-02-10"
+    }
+  ],
+  "camera": {
+    "resolution": [
+      640,
+      360
+    ],
+    "frequency_hz": 15,
+    "warmup_frames": 8,
+    "front_prim_suffix": "base_link/front_camera_link/Camera"
+  },
+  "ros2": {
+    "domain_id": 115,
+    "queue_size": 3,
+    "image_topic_suffix": "camera/front/color/image_raw",
+    "request_topic_suffix": "ocr/request",
+    "result_topic_suffix": "ocr/result",
+    "control_topic_suffix": "ocr/control",
+    "status_topic_suffix": "align/status"
+  },
+  "teleop": {
+    "linear_speed_mps": 1.5,
+    "lateral_speed_mps": 1.1,
+    "angular_speed_rad_s": 2.4,
+    "linear_accel_mps2": 2.0,
+    "lateral_accel_mps2": 6.0,
+    "angular_accel_rad_s2": 10.0,
+    "lift_command_speed_mps": 0.012,
+    "wheel_visual_velocity_limit_deg_s": 1800.0
+  },
+  "amr_geometry": {
+    "wheel_radius": 0.075,
+    "wheel_x": 0.3,
+    "wheel_y": 0.2825,
+    "lift_lower_limit_m": 0.0,
+    "lift_upper_limit_m": 0.035
+  },
+  "auto_approach": {
+    "enabled": true,
+    "frames_to_check": 1,
+    "stable_tracking_messages": 2,
+    "tracking_timeout_sec": 6.0,
+    "lateral_kp": 1.6,
+    "max_lateral_speed_mps": 0.2,
+    "forward_distance_m": 3.328,
+    "forward_speed_mps": 0.64,
+    "x_tolerance_px": 12.0,
+    "yaw_align_threshold_px": 1000000.0,
+    "yaw_kp": 0.9,
+    "max_yaw_speed_rad_s": 0.36,
+    "min_yaw_speed_rad_s": 0.1
+  },
+  "nav2": {
+    "enabled": true,
+    "command_timeout_sec": 1.0,
+    "odom_publish_hz": 30.0,
+    "scan_publish_hz": 10.0,
+    "clock_publish_hz": 60.0,
+    "max_linear_speed_mps": 1.8,
+    "max_lateral_speed_mps": 1.1,
+    "max_angular_speed_rad_s": 2.4,
+    "lidar": {
+      "prim_name": "nav_lidar",
+      "translation": [
+        0.0,
+        0.0,
+        0.32
+      ],
+      "min_range_m": 0.15,
+      "max_range_m": 12.0,
+      "horizontal_resolution_deg": 0.5,
+      "vertical_fov_deg": 1.0,
+      "vertical_resolution_deg": 1.0,
+      "rotation_rate_hz": 0.0,
+      "yaw_offset_deg": 0.0,
+      "draw_points": false,
+      "draw_lines": false
+    },
+    "robots": [
+      {
+        "amr_name": "AMR1",
+        "cmd_vel_topic": "/cmd_vel",
+        "odom_topic": "/odom",
+        "scan_topic": "/scan",
+        "clock_topic": "/clock",
+        "odom_frame": "odom",
+        "base_frame": "base_link",
+        "scan_frame": "base_scan",
+        "publish_clock": true,
+        "tf_topic": "/tf",
+        "world_pose_topic": "/amr1/world_pose"
+      },
+      {
+        "amr_name": "AMR2",
+        "cmd_vel_topic": "/amr2/cmd_vel",
+        "odom_topic": "/amr2/odom",
+        "scan_topic": "/amr2/scan",
+        "clock_topic": "/clock",
+        "odom_frame": "amr2/odom",
+        "base_frame": "amr2/base_link",
+        "scan_frame": "amr2/base_scan",
+        "publish_clock": false,
+        "tf_topic": "/amr2/tf",
+        "world_pose_topic": "/amr2/world_pose"
+      }
+    ]
+  },
+  "magnetic_dock": {
+    "enabled": true,
+    "auto_enabled_on_start": true,
+    "capture_distance_m": 1.2,
+    "candidate_bed_paths": [
+      "/World/Bed_KimSeoul",
+      "/World/ParkIncheon",
+      "/World/SeoSuwon",
+      "/World/HospitalBed1",
+      "/World/HospitalBed2",
+      "/World/HospitalBed3",
+      "/World/HospitalBed",
+      "/World/Bed1",
+      "/World/Bed2",
+      "/World/Bed3"
+    ],
+    "candidate_name_keywords": [
+      "bed",
+      "kimseoul",
+      "parkincheon",
+      "seosuwon"
+    ],
+    "break_force_n": 1000000000.0,
+    "break_torque_nm": 1000000000.0,
+    "auto_raise_lift_after_lock": true,
+    "auto_lower_lift_after_release": true,
+    "lift_settle_sec": 3.2,
+    "attached_caster_low_friction": {
+      "enabled": true,
+      "static_friction": 0.02,
+      "dynamic_friction": 0.01,
+      "note": "Only while magnetically attached: lower bed caster/wheel floor friction to suppress stick-slip; restore on release."
+    }
+  },
+  "amr2_clone": {
+    "enabled": true,
+    "source_path": "/World/AMR1",
+    "target_path": "/World/AMR2"
+  },
+  "loaded_drive_profile": {
+    "enabled": true,
+    "wheel_max_force_nm": 60.0,
+    "amr1_wheel_max_force_nm": 60.0
+  },
+  "elevator": {
+    "enabled": true,
+    "trigger_key": "ROS_ONLY",
+    "implementation": "rokey-pre-lift-fixed-joint-plus-physx-kinematic-floor-support-handoff",
+    "operation_mode": "request-response-service-bidirectional",
+    "lift_prim_names": [
+      "Side_Lift_Anim_29",
+      "Side_Lift_Anim_28",
+      "Dummy002"
+    ],
+    "floor_prim_name": "Side_Lift_Anim_29",
+    "lift_distance_m": 11.325,
+    "door_time_s": 2.0,
+    "lift_time_s": 9.0,
+    "floor_proxy_thickness_m": 0.1,
+    "floor_proxy_top_bias_m": -0.001,
+    "floor_proxy_inset_m": 0.03,
+    "capture_margin_m": 0.35,
+    "floor_target_tolerance_m": 0.025,
+    "arrival_floor_sync_timeout_s": 3.0,
+    "arrival_joint_hold_s": 1.5,
+    "post_release_settle_s": 1.2,
+    "boarding_settle_s": 2.0,
+    "entry_distance_m": 7.0,
+    "entry_speed_mps": 0.25,
+    "exit_reverse_distance_m": 5.0,
+    "exit_reverse_speed_mps": 0.25,
+    "rotation_angle_rad": 6.283185307179586,
+    "rotation_speed_rad_s": 0.55,
+    "phase_timeout_s": 90.0,
+    "arrival_command_topic": "/elevator/amr_arrived",
+    "status_topic": "/elevator/status",
+    "map_switch_ack_topic": "/elevator/map_switch_ack",
+    "final_arrival_topic": "/amr1/elevator/arrived",
+    "request_up_service_suffix": "elevator/request_up",
+    "request_down_service_suffix": "elevator/request_down",
+    "return_entry_distance_m": 10.0,
+    "return_entry_speed_mps": 0.25,
+    "return_exit_distance_m": 5.0,
+    "return_exit_speed_mps": 0.25,
+    "mutex_policy": "first-approved-owner-until-complete",
+    "boarding_target_y": 25.91,
+    "return_boarding_target_y": 25.91,
+    "return_exit_target_y": 21.487224578857422
+  },
+  "patient_mri": {
+    "enabled": true,
+    "extension_id": "hospital.patient_transfer",
+    "extension_folder": "patient_mri_transfer/exts",
+    "config": "patient_mri_transfer/config/patient_transfer.json"
+  },
+  "fixed_mri_target": {
+    "enabled": true,
+    "target_prim": "/World/HospitalRuntimeTargets/MRIPatientTarget",
+    "source_table_prim": "/World/HospitalMap/scene/Meshes/Sketchfab_model/Collada_visual_scene_group/TableTop",
+    "world_xyz_m": [
+      7.41316,
+      5.80355,
+      12.2733
+    ],
+    "preserve_source_rotation": false,
+    "fallback_yaw_deg": 0.0,
+    "note": "Measured MRI TableTop translation is preserved, but source rotation is intentionally ignored so every patient MRI turn is a horizontal world-Z yaw and can never pitch into the floor.",
+    "orientation_mode": "world_z_yaw_only"
+  },
+  "follow_camera": {
+    "enabled": true,
+    "body_path": "/World/AMR1/base_link",
+    "rig_path": "/World/AMR1/base_link/FollowCameraRig",
+    "camera_path": "/World/AMR1/base_link/FollowCameraRig/FollowCamera",
+    "position_local_m": [
+      0.0,
+      0.0,
+      6.0
+    ],
+    "target_local_m": [
+      0.0,
+      0.0,
+      0.35
+    ],
+    "focal_length_mm": 24.0,
+    "clipping_range_m": [
+      0.05,
+      10000.0
+    ],
+    "set_active_viewport": true,
+    "up_local": [
+      1.0,
+      0.0,
+      0.0
+    ],
+    "view_mode": "amr_local_top_down_follow",
+    "note": "Starts directly above AMR1, +X toward screen top; remains parented to base_link and follows translation/yaw."
+  },
+  "hospital_staff": {
+    "enabled": true,
+    "root_prim": "/World/HospitalStaff",
+    "anchor_exclude_keywords": [
+      "mri",
+      "patient",
+      "bed",
+      "operating",
+      "dining",
+      "material"
+    ],
+    "first_floor_max_world_z": 6.0,
+    "fallback_anchor_world": [
+      -34.5,
+      12.0,
+      0.0
+    ],
+    "people": [
+      {
+        "role": "Doctor",
+        "source_asset": "staff_assets/source/woman_doctor.glb",
+        "converted_usd": "staff_assets/converted/woman_doctor.usd",
+        "root_prim": "/World/HospitalStaff/Doctor",
+        "uniform_scale": 0.01,
+        "model_yaw_offset_deg": 90.0,
+        "upright_candidate_rotations_xyz_deg": [
+          [
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            90.0,
+            0.0,
+            0.0
+          ],
+          [
+            -90.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            90.0,
+            0.0
+          ],
+          [
+            0.0,
+            -90.0,
+            0.0
+          ]
+        ],
+        "upright_compose_frames": 4,
+        "max_floor_fit_m": 3.0,
+        "target_height_stage_units": 1.72,
+        "min_auto_scale": 1e-05,
+        "max_auto_scale": 10.0,
+        "facing_note": "Rotated 180 degrees from the previous -90 setting so the staff face the intended corridor/elevator direction."
+      },
+      {
+        "role": "Nurse",
+        "source_asset": "staff_assets/source/brenda_nurse.glb",
+        "converted_usd": "staff_assets/converted/brenda_nurse.usd",
+        "root_prim": "/World/HospitalStaff/Nurse",
+        "uniform_scale": 0.01,
+        "model_yaw_offset_deg": 90.0,
+        "upright_candidate_rotations_xyz_deg": [
+          [
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            90.0,
+            0.0,
+            0.0
+          ],
+          [
+            -90.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            90.0,
+            0.0
+          ],
+          [
+            0.0,
+            -90.0,
+            0.0
+          ]
+        ],
+        "upright_compose_frames": 4,
+        "max_floor_fit_m": 3.0,
+        "target_height_stage_units": 1.66,
+        "min_auto_scale": 1e-05,
+        "max_auto_scale": 10.0,
+        "facing_note": "Rotated 180 degrees from the previous -90 setting so the staff face the intended corridor/elevator direction."
+      }
+    ],
+    "placement_mode": "elevator_opposite_station_chair_back",
+    "station_anchor_names": [
+      "office_desk",
+      "tablemid",
+      "desk"
+    ],
+    "station_chair_names": [
+      "chair_01a",
+      "chair"
+    ],
+    "elevator_anchor_names": [
+      "Side_Lift_Anim_29",
+      "Side_Lift_Anim_28",
+      "Dummy002",
+      "elevator",
+      "lift"
+    ],
+    "chair_search_radius_m": 6.0,
+    "behind_chair_offset_m": 0.65,
+    "fallback_lateral_spacing_m": 0.75,
+    "fallback_elevator_world": [
+      -35.3208,
+      12.4256,
+      0.0
+    ],
+    "note": "Human height and station offsets are normalized directly in hospital map stage units; do not convert through metersPerUnit.",
+    "placement_unit_mode": "stage_units"
+  },
+  "amr2_initial_pose": {
+    "x": -47.2788,
+    "y": 26.5713,
+    "yaw": 0.0
+  },
+  "corridor_priority": {
+    "enabled": true,
+    "corridor_1": {
+      "min_x": -38.562,
+      "max_x": -32.0796,
+      "min_y": 10.5645,
+      "max_y": 14.2866
+    },
+    "wait_poses": {
+      "room_side": {
+        "x": -40.0,
+        "y": 8.0,
+        "yaw_deg": 90.0
+      },
+      "elevator_side": {
+        "x": -30.0,
+        "y": 18.0,
+        "yaw_deg": -90.0
+      }
+    },
+    "release_delay_sec": 3.0,
+    "note": "Separate ROS goal reservation manager only; centerline planner/controller parameters are unchanged."
+  },
+  "requested_floor_fix": {
+    "enabled": true,
+    "floor2_path": "/World/HospitalMap/Cube",
+    "remove_collision_path": "/World/GroundPlane/CollisionMesh",
+    "level_tolerance_m": 0.25,
+    "min_floor_span_m": 1.0,
+    "min_floor_area_m2": 4.0,
+    "max_floor_thickness_m": 0.65,
+    "fallback_static_friction": 0.95,
+    "fallback_dynamic_friction": 0.85,
+    "note": "Only requested floor fix: copy 1F floor friction to /World/HospitalMap/Cube and deactivate /World/GroundPlane/CollisionMesh at runtime."
+  },
+  "mri_scene_position": {
+    "enabled": true,
+    "prim_path": "/World/HospitalMap/scene",
+    "x_m": 7.41316,
+    "y_m": 5.80355,
+    "preserve_z_rotation_scale": true
+  },
+  "aruco_markers": {
+    "enabled": true,
+    "dictionary": "DICT_4X4_50",
+    "marker_size_m": 0.14,
+    "card_size_m": 0.16,
+    "gap_from_nameplate_m": 0.025,
+    "normal_offset_m": 0.012,
+    "placement": "SEPARATE PNG cards; front-view left/right fixed; parented under bed root; original OCR nameplate untouched",
+    "id_assignment": "김서울=10/11, 박인천=20/21, 서수원=30/31",
+    "beds": [
+      {
+        "patient": "김서울",
+        "bed_prim": "/World/Bed_KimSeoul",
+        "bed_name_tokens": [
+          "kimseoul",
+          "bed_kimseoul",
+          "hospitalbed_kimseoul"
+        ],
+        "left_id": 10,
+        "right_id": 11,
+        "left_texture": "project4/signs/aruco/aruco_4x4_50_id_10.png",
+        "right_texture": "project4/signs/aruco/aruco_4x4_50_id_11.png"
+      },
+      {
+        "patient": "박인천",
+        "bed_prim": "/World/ParkIncheon",
+        "bed_name_tokens": [
+          "parkincheon",
+          "hospitalbed_parkincheon"
+        ],
+        "left_id": 20,
+        "right_id": 21,
+        "left_texture": "project4/signs/aruco/aruco_4x4_50_id_20.png",
+        "right_texture": "project4/signs/aruco/aruco_4x4_50_id_21.png"
+      },
+      {
+        "patient": "서수원",
+        "bed_prim": "/World/SeoSuwon",
+        "bed_name_tokens": [
+          "seosuwon",
+          "hospitalbed_seosuwon"
+        ],
+        "left_id": 30,
+        "right_id": 31,
+        "left_texture": "project4/signs/aruco/aruco_4x4_50_id_30.png",
+        "right_texture": "project4/signs/aruco/aruco_4x4_50_id_31.png"
+      }
+    ]
+  }
+}

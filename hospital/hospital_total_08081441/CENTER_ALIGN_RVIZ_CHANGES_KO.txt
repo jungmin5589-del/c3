@@ -1,0 +1,9 @@
+김서울 OCR 중앙 정렬 / RViz 표시 수정
+
+1. OCR 검증 후 이름표가 화면에서 크게 벗어나면 저속 회전으로 정면 방향을 먼저 맞춥니다.
+2. 중앙 근처에서는 Q/E와 같은 횡이동으로 이름표 X 중심과 화면 X 중심을 6px 이내로 맞춥니다.
+3. 5회 연속 중앙 판정 후에만 3.328m 전진합니다.
+4. local_costmap inflation_radius는 0.90m에서 0.30m로 축소했습니다. global_costmap은 그대로입니다.
+5. RViz에 /local_costmap/published_footprint Polygon 표시를 추가했습니다.
+6. RViz RobotModel은 작은 0.34m 정사각형으로 단순화했습니다. 실제 Isaac 모델과 Nav2 계획 반경 0.52m는 변경하지 않았습니다.
+7. ROS_DOMAIN_ID=115를 유지합니다.

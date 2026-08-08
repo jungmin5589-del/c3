@@ -1,0 +1,20 @@
+김서울 1명 전용 버전
+
+변경한 것만:
+- 환자 선택은 1. 김서울만 유지
+- ROS_DOMAIN_ID=115 고정
+- 김서울 OCR 위치 이동
+- OCR 판독 + 이름표 X 중심 정렬
+- OCR 성공 후 3.328m 전진
+- C 키와 동일한 마그네틱 결합
+- 3.328m 직선 후진
+- 엘리베이터 앞 이동
+
+변경하지 않은 것:
+- Nav2 주행 코드
+- nav2_bridge.py
+- centerline_navigator.py
+- Nav2 파라미터
+- footprint_switcher.py
+- RViz 풋프린트 표시
+- 로컬/글로벌 코스트맵 설정
